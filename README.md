@@ -23,10 +23,7 @@
 - 旅に出るなかまの募集（実装の優先順位は低いため、後半の進捗次第て着手）
 
 ## 設計書
-各種設計資料はこれから作成のため、作成出来次第随時追加していきます。
-
-## チャレンジ要素一覧
-https://docs.google.com/spreadsheets/d/1IIK4spgb3w0cVXS6PsZMzgDguZubS90E3qQx6NWRPU8/edit?usp=sharing
+[機能一覧(Googleスプレッドシートが開きます)](https://docs.google.com/spreadsheets/d/1IIK4spgb3w0cVXS6PsZMzgDguZubS90E3qQx6NWRPU8/edit#gid=0)
 
 ## 開発環境
 - OS：Linux(CentOS)
