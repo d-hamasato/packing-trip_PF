@@ -6,21 +6,36 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <%= link_to "ブログ", "#", class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "パッキング", "#", class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "アイテム", "#", class: "nav-link" %>
-        </li>
-        <li class="nav-item ml-3">
-          <%= link_to "アカウント作成", "#", class: "nav-link" %>
-        </li>
-        <li class="nav-item active">
-          <%= link_to " ログイン", "#", class: "nav-link" %>
-        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item active">
+            <%= link_to "旅のブログ", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "パッキング", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "アイテム", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item active ml-3">
+            <%= link_to " ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        <% else %>
+          <li class="nav-item active">
+            <%= link_to "旅のブログ", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "パッキング", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "アイテム", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item ml-3">
+            <%= link_to "アカウント作成", new_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to " ログイン", user_session_path, method: :post, class: "nav-link" %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
