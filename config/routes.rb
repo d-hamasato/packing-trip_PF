@@ -4,5 +4,9 @@ Rails.application.routes.draw do
   root "static_pages#top"
   get "about" => "static_pages#about"
 
-  resources :items, only: [:new, :index, :show, :create, :update, :destroy]
+  resources :items do
+    member do
+      patch :switch_status
+    end
+  end
 end
