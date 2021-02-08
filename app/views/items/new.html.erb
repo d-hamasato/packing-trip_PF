@@ -1,0 +1,29 @@
+<%= render 'layouts/errors', obj: @item %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <h2 class="text-center">アイテム登録</h2>
+      <%= form_with model: @item, local: true do |f| %>
+        <div class="form-group">
+          <%= f.label :name, "アイテム名" %>
+          <%= f.text_field :name, autofocus: true, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :description, "アイテムの説明" %>
+          <%= f.text_field :description, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :item_img, "アイテムの画像" %>
+          <%= f.file_field :item_img, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :weight, "アイテムの重量(g)" %>
+          <%= f.text_field :weight, placeholder: "500", class: "form-control" %>
+        </div>
+        <div class="text-center">
+          <%= f.submit "アイテム登録", class: "btn btn-sm btn-success" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

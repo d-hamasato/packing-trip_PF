@@ -6,7 +6,7 @@ class CreateBlogs < ActiveRecord::Migration[5.2]
       t.string :title,        null: false
       t.integer :category,    null: false, default: 0
       t.date :departed_date,  null: false
-      t.string :blog_tmb_img, null: false, default: "/no_images/no_image_blog_tmb_img.jpg"
+      t.string :blog_tmb_img
       t.text :content,        null: false
       t.string :destination
 

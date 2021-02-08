@@ -5,7 +5,7 @@ class CreatePackings < ActiveRecord::Migration[5.2]
       t.string :name,              null: false
       t.text :description
       t.integer :number_of_nights, null: false, default: 0
-      t.string :packing_img,       null: false, default: "/no_images/no_image_packing.jpg"
+      t.string :packing_img
       t.boolean :is_public?,       null: false, default: true
 
       t.timestamps null: false

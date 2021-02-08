@@ -1,0 +1,26 @@
+<div class="container">
+  <h2 class="text-center">アイテム一覧</h2>
+  <div class="row row-cols-1 row-cols-md-5 g-4 ">
+    <% @items.each do |item| %>
+      <div class="col mt-4">
+        <div class="card h-100">
+          <!--アイテム画像が登録されていればその画像、登録されていなければno_imageを表示-->
+          <% if item.item_img.present? %>
+            <!--<%= image_tag item.item_img.thumb.url, class: "card-img-top" %>-->
+            <%= image_tag item.item_img.url, class: "card-img-top" %>
+          <% else %>
+            <%= image_tag "no_images/no_image_item.jpg", class: "card-img-top" %>
+          <% end %>
+          <div class="card-body">
+            <%= link_to item.name, item_path(item), class: "card-title fw-bold mb-0" %>
+            <!--<p class="card-text">%= item.user.name %></p>-->
+          </div>
+          <div class="card-footer d-flex justify-content-end">
+            <small class="text-muted">weight <%= item.weight %> g</small>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

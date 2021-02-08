@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="row">
+    <div class="item_img mb-4">
+      <!--アイテム画像が登録されていればその画像、登録されていなければno_imageを表示-->
+      <% if @item.item_img.present? %>
+        <%= image_tag @item.item_img.url %>
+      <% else %>
+        <%= image_tag "no_images/no_image_item.jpg" %>
+      <% end %>
+    </div>
+    <div class="card mx-auto" style="width: 25rem;">
+      <div class="card-body">
+        <h4 class="card-title"><%= @item.name %></h5>
+        <h6 class="card-subtitle mb-2 text-muted"><%= @item.weight %> g</h6>
+        <p class="card-text"><%= @item.description %></p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">アイテムステータス</li>
+          <li class="list-group-item d-flex justify-content-between">
+            <% if @item.is_public? %>
+              <span>公開中</span>
+              <% if user_signed_in? && @item.user_id == current_user.id %>
+                <span>
+                  <%= link_to switch_status_item_path(@item, item: {is_public?: false}), method: :patch do %>
+                    <i class="fas fa-toggle-on fa-2x"></i>
+                  <% end %>
+                </span>
+              <% end %>
+            <% else %>
+              <span>非公開</span>
+              <% if user_signed_in? && @item.user_id == current_user.id %>
+                <span>
+                  <%= link_to switch_status_item_path(@item, item: {is_public?: true}), method: :patch do %>
+                    <i class="fas fa-toggle-off fa-2x	"></i>
+                  <% end %>
+                </span>
+              <% end %>
+            <% end %>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <% if @item.has? %>
+              <span>このアイテムを持っている</span>
+              <% if user_signed_in? && @item.user_id == current_user.id %>
+                <span>
+                  <%= link_to switch_status_item_path(@item, item: {has?: false}), method: :patch do %>
+                    <i class="fas fa-toggle-on fa-2x"></i>
+                  <% end %>
+                </span>
+              <% end %>
+            <% else %>
+              <span>いまはこのアイテムを持っていない</span>
+              <% if user_signed_in? && @item.user_id == current_user.id %>
+                <span>
+                  <%= link_to switch_status_item_path(@item, item: {has?: true}), method: :patch do %>
+                    <i class="fas fa-toggle-off fa-2x	"></i>
+                  <% end %>
+                </span>
+              <% end%>
+            <% end %>
+          </li>
+          <% if user_signed_in? && @item.user_id == current_user.id %>
+            <li class="list-group-item d-flex justify-content-end">
+              <%= link_to edit_item_path(@item) do %>
+                <i class="fas fa-edit fa-2x ml-3"></i>
+              <% end %>
+              <%= link_to item_path(@item), method: :delete do %>
+                <i class="far fa-trash-alt fa-2x ml-3"></i>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
