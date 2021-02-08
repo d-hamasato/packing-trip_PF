@@ -4,8 +4,8 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true
       t.string :name,        null: false
       t.text :description
-      t.string :item_img,    null: false, default: "/no_images/no_image_item.jpg"
-      t.integer :weight,     null: false, default: 0
+      t.string :item_img
+      t.integer :weight
       t.boolean :is_public?, null: false, default: true
       t.boolean :has?,       null: false, default: true
 

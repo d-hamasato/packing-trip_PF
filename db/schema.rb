@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2021_02_06_045346) do
     t.string "title", null: false
     t.integer "category", default: 0, null: false
     t.date "departed_date", null: false
-    t.string "blog_tmb_img", default: "/no_images/no_image_blog_tmb_img.jpg", null: false
+    t.string "blog_tmb_img"
     t.text "content", null: false
     t.string "destination"
     t.datetime "created_at", null: false
@@ -65,8 +65,8 @@ ActiveRecord::Schema.define(version: 2021_02_06_045346) do
     t.integer "user_id"
     t.string "name", null: false
     t.text "description"
-    t.string "item_img", default: "/no_images/no_image_item.jpg", null: false
-    t.integer "weight", default: 0, null: false
+    t.string "item_img"
+    t.integer "weight"
     t.boolean "is_public?", default: true, null: false
     t.boolean "has?", default: true, null: false
     t.datetime "created_at", null: false
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2021_02_06_045346) do
     t.string "name", null: false
     t.text "description"
     t.integer "number_of_nights", default: 0, null: false
-    t.string "packing_img", default: "/no_images/no_image_packing.jpg", null: false
+    t.string "packing_img"
     t.boolean "is_public?", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
