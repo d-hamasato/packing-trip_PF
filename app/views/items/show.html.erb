@@ -1,7 +1,12 @@
 <div class="container">
   <div class="row">
-    <div>
-      <%= image_tag @item.item_img.url, class: "mb-4" %>
+    <div class="item_img mb-4">
+      <!--アイテム画像が登録されていればその画像、登録されていなければno_imageを表示-->
+      <% if @item.item_img.present? %>
+        <%= image_tag @item.item_img.url %>
+      <% else %>
+        <%= image_tag "no_images/no_image_item.jpg" %>
+      <% end %>
     </div>
     <div class="card mx-auto" style="width: 25rem;">
       <div class="card-body">
