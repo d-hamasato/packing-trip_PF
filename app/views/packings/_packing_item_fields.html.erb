@@ -1,0 +1,13 @@
+<div class='nested-fields'>
+  <div class="form-group d-flex justify-content-between">
+    <%= f.label :item_id, "アイテム選択" %>
+    <%= f.select :item_id, @selectable_items, class: "form-control" %>
+  </div>
+  <div class="form-group d-flex justify-content-between">
+    <%= f.label :qty, "数量選択" %>
+    <%= f.select :qty, [*(1..10)], selected: 1, class: "form-control" %>
+  </div>
+  <div class="d-flex justify-content-end">
+    <%= link_to_remove_association "削除", f, class: "btn btn-sm btn-danger" %>
+  </div>
+</div>
