@@ -13,13 +13,14 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require cocoon
 //= require rails-ujs
 //= require activestorage
-//= require cocoon
+//= require turbolinks
 //= require_tree .
 
 // topページ skipperによるスライド
-$(document).ready(function () {
+$(document).on('turbolinks:load', function () {
   $("#images").skippr({
     // スライドショーの変化 ("fade" or "slide")
     transition : 'fade',
