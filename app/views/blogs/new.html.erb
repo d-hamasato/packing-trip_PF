@@ -1,0 +1,37 @@
+<%= render 'layouts/errors', obj: @blog %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      <h2 class="text-center">ブログ登録</h2>
+      <%= form_with model: @blog, local: true do |f| %>
+        <div class="form-group">
+          <%= f.label :title, "タイトル" %>
+          <%= f.text_field :title, autofocus: true, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :category, "旅のカテゴリー" %>
+          <%= f.select :category, Blog.categories.keys, selected: @blog.category, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :departed_date, "出発日" %>
+          <%= f.date_field :departed_date, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :destination, "目的地" %>
+          <%= f.text_field :destination, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :blog_tmb_img, "ブログのサムネイル画像" %>
+          <%= f.file_field :blog_tmb_img, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :content, "ブログ内容" %>
+          <%= f.text_area :content, 'data-provider': :summernote %>
+        </div>
+        <div class="text-center">
+          <%= f.submit "ブログ登録", class: "btn btn-sm btn-success" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
