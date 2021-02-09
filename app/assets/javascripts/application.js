@@ -15,6 +15,7 @@
 //= require bootstrap-sprockets
 //= require cocoon
 //= require rails-ujs
+//= require summernote/summernote-bs4.min
 //= require activestorage
 //= require turbolinks
 //= require_tree .
