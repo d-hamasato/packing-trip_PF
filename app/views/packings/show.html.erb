@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="packing_img mb-4">
+      <!--パッキング画像が登録されていればその画像、登録されていなければno_imageを表示-->
+      <% if @packing.packing_img.present? %>
+        <%= image_tag @packing.packing_img.url %>
+      <% else %>
+        <%= image_tag "no_images/no_image_packing.jpg" %>
+      <% end %>
+    </div>
+    <div class="card mx-auto mb-4" style="width: 25rem;">
+      <div class="card-body">
+        <h4 class="card-title"><%= @packing.name %></h5>
+        <h6 class="card-subtitle mb-2 text-muted">パッキング重量 <%= @packing_weight %> g</h6>
+        <p class="card-text"><%= @packing.description %></p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between">
+            <% if @packing.is_public? %>
+              <% if user_signed_in? && @packing.user_id == current_user.id %>
+                <span>公開中</span>
+                <span>
+                  <%= link_to switch_status_packing_path(@packing, packing: {is_public?: false}), method: :patch do %>
+                    <i class="fas fa-toggle-on fa-2x"></i>
+                  <% end %>
+                </span>
+              <% end %>
+            <% else %>
+              <% if user_signed_in? && @packing.user_id == current_user.id %>
+                <span>非公開</span>
+                <span>
+                  <%= link_to switch_status_packing_path(@packing, packing: {is_public?: true}), method: :patch do %>
+                    <i class="fas fa-toggle-off fa-2x	"></i>
+                  <% end %>
+                </span>
+              <% end %>
+            <% end %>
+          </li>
+          <% if user_signed_in? && @packing.user_id == current_user.id %>
+            <li class="list-group-item d-flex justify-content-end">
+              <!--パッキング内容の編集ページへのリンク-->
+              <%= link_to edit_packing_path(@packing) do %>
+                <i class="fas fa-edit fa-2x ml-3"></i>
+              <% end %>
+              <!--パッキング削除のリンク-->
+              <%= link_to packing_path(@packing), method: :delete, data: { confirm: "本当に削除しますか？" } do %>
+                <i class="far fa-trash-alt fa-2x ml-3"></i>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <h4 class="text-center">パッキングアイテム一覧</h4>
+  <!--@packingに紐付いたアイテムを表示-->
+  <%=render 'items/index', items: @items %>
+</div>

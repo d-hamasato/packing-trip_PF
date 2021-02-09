@@ -15,7 +15,7 @@
 //= require bootstrap-sprockets
 //= require rails-ujs
 //= require activestorage
-
+//= require cocoon
 //= require_tree .
 
 // topページ skipperによるスライド
