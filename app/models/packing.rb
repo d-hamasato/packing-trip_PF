@@ -5,6 +5,8 @@ class Packing < ApplicationRecord
   has_many :packing_items, inverse_of: :packing, dependent: :destroy
   accepts_nested_attributes_for :packing_items, reject_if: :all_blank, allow_destroy: true
 
+  mount_uploader :packing_img, ItemImgUploader
+
   enum number_of_nights: {
     '未選択': 0,
     '日帰り': 1,

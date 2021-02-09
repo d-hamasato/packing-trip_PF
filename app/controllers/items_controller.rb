@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update, :switch_status]
-  before_action :correct_user, only: [:edit, :update, :switch_status]
+  before_action :authenticate_user!, only: [:edit, :create, :update, :destroy, :switch_status]
+  before_action :correct_user, only: [:edit, :create, :update, :destroy, :switch_status]
   before_action :is_public?, only: [:show]
 
   def new
@@ -43,8 +43,10 @@ class ItemsController < ApplicationController
 
   def destroy
     item = Item.find(params[:id])
-    item.destroy
-    redirect_to user_path(current_user)
+    if item.destroy
+      flash[:success] = "アイテムを削除しました"
+      redirect_to user_path(current_user)
+    end
   end
 
   def switch_status

@@ -17,8 +17,8 @@
           <li class="list-group-item">アイテムステータス</li>
           <li class="list-group-item d-flex justify-content-between">
             <% if @item.is_public? %>
-              <span>公開中</span>
               <% if user_signed_in? && @item.user_id == current_user.id %>
+                <span>公開中</span>
                 <span>
                   <%= link_to switch_status_item_path(@item, item: {is_public?: false}), method: :patch do %>
                     <i class="fas fa-toggle-on fa-2x"></i>
@@ -26,8 +26,8 @@
                 </span>
               <% end %>
             <% else %>
-              <span>非公開</span>
               <% if user_signed_in? && @item.user_id == current_user.id %>
+                <span>非公開</span>
                 <span>
                   <%= link_to switch_status_item_path(@item, item: {is_public?: true}), method: :patch do %>
                     <i class="fas fa-toggle-off fa-2x	"></i>
@@ -59,10 +59,12 @@
           </li>
           <% if user_signed_in? && @item.user_id == current_user.id %>
             <li class="list-group-item d-flex justify-content-end">
+              <!--アイテム内容の編集ページへのリンク-->
               <%= link_to edit_item_path(@item) do %>
                 <i class="fas fa-edit fa-2x ml-3"></i>
               <% end %>
-              <%= link_to item_path(@item), method: :delete do %>
+              <!--アイテム削除のリンク-->
+              <%= link_to item_path(@item), method: :delete, data: { confirm: "本当に削除しますか？" }  do %>
                 <i class="far fa-trash-alt fa-2x ml-3"></i>
               <% end %>
             </li>

@@ -14,5 +14,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :packings
+  resources :packings do
+    member do
+      patch :switch_status
+    end
+  end
 end
