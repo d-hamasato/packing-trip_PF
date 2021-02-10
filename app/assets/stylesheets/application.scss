@@ -16,7 +16,7 @@
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
-
+@import "summernote-bs4";
 * {
   margin: 0;
   padding: 0;
@@ -26,6 +26,18 @@
 
 body {
   padding-top: 56px;
+}
+a {
+  color: #000;
+
+  &:visited {
+    color: rgb(181, 181, 181);
+  }
+
+  &:hover {
+    columns: #000;
+    background-color: #fff;
+  }
 }
 
 // topページ skipperによるスライド

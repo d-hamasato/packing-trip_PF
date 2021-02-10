@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :items, dependent: :destroy
   has_many :packings, dependent: :destroy
+  has_many :blogs, dependent: :destroy
 end

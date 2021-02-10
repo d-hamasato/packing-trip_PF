@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-  get 'packings/new'
-  get 'packings/index'
-  get 'packings/edit'
-  get 'packings/show'
+  get 'uploads/create'
+  get 'uploads/destroy'
   devise_for :users
 
   root "static_pages#top"
@@ -13,10 +11,12 @@ Rails.application.routes.draw do
       patch :switch_status
     end
   end
-
   resources :packings do
     member do
       patch :switch_status
     end
   end
+  resources :blogs
+  # ↓summernoteによるブログコンテンツ内の画像アップロードのため記述
+  resources :uploads, only: [:create, :destroy]
 end

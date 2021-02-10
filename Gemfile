@@ -66,8 +66,10 @@ gem 'devise'
 gem 'bootstrap', '~> 4.5'
 gem 'jquery-rails'
 gem 'font-awesome-sass'
-
+# 画像アップロード、リサイズ
 gem 'carrierwave', '~> 2.0'
 gem 'mini_magick'
-
+# 親子関係を持ったフォームの作成
 gem 'cocoon'
+# リッチテキストエディタ
+gem 'summernote-rails', '~> 0.8.10.0'
