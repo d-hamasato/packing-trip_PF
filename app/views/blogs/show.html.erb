@@ -1,2 +1,38 @@
-<h1>Blogs#show</h1>
-<p>Find me in app/views/blogs/show.html.erb</p>
+<!--ブログトップイメージ、使うか検討中-->
+<!--<div class="card">-->
+<!--  <div class="blog-top-image card-img"></div>-->
+<!--  <style>-->
+<!--    .blog-top-image {-->
+<!--      width: 100%;-->
+<!--      max-width: 1200px;-->
+<!--      height: 270px;-->
+<!--      background-image: url(<%= @blog_top_image %>);-->
+<!--      background-position: center center;-->
+<!--    }-->
+<!--  </style>-->
+<!--  <div class="card-img-overlay">-->
+<!--    <h5 class="card-title">Card title</h5>-->
+<!--    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+<!--    <p class="card-text">Last updated 3 mins ago</p>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+      <p>To <%= @blog.destination %></p>
+      <p>旅のカテゴリ <%= @blog.category %></p>
+      <h2 class=""><%= @blog.title %></h2>
+      <p class="text-right">出発日 <%= @blog.departed_date %></p>
+      <%=raw @blog.content %>
+    </div>
+  </div>
+</div>
+
+

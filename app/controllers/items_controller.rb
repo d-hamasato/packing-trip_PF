@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :create, :update, :destroy, :switch_status]
-  before_action :correct_user, only: [:edit, :create, :update, :destroy, :switch_status]
+  before_action :correct_user, only: [:edit, :update, :destroy, :switch_status]
   before_action :is_public?, only: [:show]
 
   def new
@@ -34,7 +34,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.where(is_public?: true)
+    @items = Item.public_items
   end
 
   def show

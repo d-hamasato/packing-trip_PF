@@ -7,4 +7,8 @@ class Item < ApplicationRecord
   validates :weight, numericality: { only_integer: true }
 
   mount_uploader :item_img, ItemImgUploader
+
+  scope :public_items, -> { where(is_public?: true) }
+  # パッキングに紐付いた複数のアイテムを取得する。
+  scope :packing_items, -> packing { where(id: packing.packing_items.pluck(:item_id)) }
 end
