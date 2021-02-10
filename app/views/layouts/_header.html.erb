@@ -28,7 +28,7 @@
               <%= link_to "お気に入り一覧", "#", class: "dropdown-item" %>
               <%= link_to "フォロー中のユーザー", "#", class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "マイページ", "#", class: "dropdown-item" %>
+              <%= link_to "マイページ", user_path(current_user.id), class: "dropdown-item" %>
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             </div>
           </li>

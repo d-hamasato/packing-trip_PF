@@ -1,2 +1,69 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-2 ">
+      <p>プロフィール</p>
+      <div class="profile_img col-9 col-md-12 mx-auto mb-3">
+        <!--プロフィール画像が登録されていればその画像、登録されていなければno_imageを表示-->
+        <% if @user.profile_img.present? %>
+          <%= image_tag @user.profile_img.url, class: "img-fluid img-profile rounded-circle" %>
+        <% else %>
+          <%= image_tag "no_images/no_image_profile.jpg", class: "img-fluid img-profile rounded-circle" %>
+        <% end %>
+      </div>
+      <p class="text-center"><%= @user.name %></p>
+      <p><%= @user.introduction %></p>
+    </div>
+    <div class="col-md-10">
+      <div class="my-items mb-5">
+        <h5>マイアイテム</h5>
+        <!--アイテム一覧をoverflowを用いて横スクロールで表示-->
+        <div class="d-flex flex-row flex-nowrap overflow-auto">
+          <% @items.each do |item| %>
+            <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+              <%= render 'items/card_item', item: item %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="my-packings">
+        <h5>マイパッキング</h5>
+        <div class="d-flex flex-row flex-nowrap overflow-auto">
+          <% @packings.each do |packing| %>
+            <div class="col-10 col-sm-8 col-md-7 col-lg-7">
+              <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                  <div class="col-md-4">
+                    <!--パッキング画像が登録されていればその画像、登録されていなければno_imageを表示-->
+                    <% if packing.packing_img.present? %>
+                      <%= image_tag packing.packing_img.thumb.url, class: "card-img-top" %>
+                    <% else %>
+                      <%= image_tag "no_images/no_image_packing.jpg", class: "card-img-top" %>
+                    <% end %>
+                    <div class="card-footer d-flex justify-content-end">
+                      <small class="text-muted">weight <%= Item.packing_items(packing).sum(:weight) %> g</small>
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= link_to packing.name, packing_path(packing) %></h5>
+                      <!--パッキング説明が一定数を超えていた場合、以降は表示しない-->
+                      <p class="card-text"><%= packing.description[0, 45] %><%= " .." if packing.description.length > 50 %></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex flex-row flex-nowrap overflow-auto">
+                  <% @items.each do |item| %>
+                    <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+                      <%= render 'items/card_item_img', item: item %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
