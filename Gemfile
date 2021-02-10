@@ -72,5 +72,4 @@ gem 'mini_magick'
 # 親子関係を持ったフォームの作成
 gem 'cocoon'
 # リッチテキストエディタ
-# gem 'simple_form'
 gem 'summernote-rails', '~> 0.8.10.0'
