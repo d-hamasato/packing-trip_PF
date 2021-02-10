@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'users/index'
+  get 'users/edit'
+  get 'users/show'
   get 'uploads/create'
   get 'uploads/destroy'
   devise_for :users
