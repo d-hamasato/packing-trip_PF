@@ -2,7 +2,7 @@
   <h2 class="text-center">パッキング一覧</h2>
   <div class="d-flex justify-content-around flex-wrap">
     <% @packings.each do |packing| %>
-      <%= render 'card_packing', packing: packing %>
+      <%= render 'card', packing: packing %>
     <% end %>
   </div>
 </div>

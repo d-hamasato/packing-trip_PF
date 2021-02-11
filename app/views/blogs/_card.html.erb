@@ -2,7 +2,7 @@
   <% if blog.blog_tmb_img.present? %>
     <%= image_tag blog.blog_tmb_img.url, class: "card-img-top" %>
   <% else %>
-    <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+    <%= image_tag "no_images/750x300.png", class: "card-img-top" %>
   <% end %>
   <div class="card-body">
     <h2 class="card-title"><%= blog.title %></h2>
@@ -21,7 +21,8 @@
       </p>
       <p class="ml-3">出発日 <%= blog.departed_date %></p>
     </div>
-    <p class="card-text"><%= blog.content[0, 150] %><%= " .." if blog.content.length > 50 %></p>
+    <!--ブログの本文の冒頭を指定数文字以下で表示（htmlタグ非表示）-->
+    <p class="card-text"><%=strip_tags blog.content[0, 200] %><%= " .." if blog.content.length > 50 %></p>
     <%= link_to "Read More →", blog_path(blog), class: "btn btn-primary" %>
   </div>
   <div class="card-footer text-muted text-right">

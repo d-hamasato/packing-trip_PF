@@ -9,7 +9,8 @@ class User < ApplicationRecord
 
   mount_uploader :profile_img, ProfileImgUploader
 
-  has_many :items,    dependent: :destroy
-  has_many :packings, dependent: :destroy
-  has_many :blogs,    dependent: :destroy
+  has_many :items,     dependent: :destroy
+  has_many :packings,  dependent: :destroy
+  has_many :blogs,     dependent: :destroy
+  has_many :favorites, dependent: :destroy
 end
