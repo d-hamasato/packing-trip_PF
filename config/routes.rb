@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  get 'uploads/create'
-  get 'uploads/destroy'
   devise_for :users
 
   root "static_pages#top"
   get "about" => "static_pages#about"
 
+  resources :users, only: [:show, :index, :edit, :update]
   resources :items do
     member do
       patch :switch_status
