@@ -2,6 +2,7 @@ class Blog < ApplicationRecord
 
   belongs_to :user
   belongs_to :packing
+  has_many :favorites
 
   validates :user_id,       presence: true
   validates :title,         presence: true, length: { maximum: 50 }
@@ -10,6 +11,10 @@ class Blog < ApplicationRecord
   validates :destination,   presence: true, length: { maximum: 50 }
 
   mount_uploader :blog_tmb_img, BlogTmbImgUploader
+
+  def favorited_by?(user)
+    favorites.where(user_id: user.id).exists?
+  end
 
   enum category: {
     '未選択': 0,

@@ -1,0 +1,11 @@
+<% if user_signed_in? %>
+  <% if item.favorited_by?(current_user) %>
+    <%= link_to item_favorites_path(item), method: :delete do %>
+      <i class="fas fa-heart fa-lg" style="color:indianred;"></i>
+    <% end %>
+  <% else %>
+    <%= link_to item_favorites_path(item), method: :post do %>
+      <i class="far fa-heart fa-lg" style="color:indianred;"></i>
+    <% end %>
+  <% end %>
+<% end %>

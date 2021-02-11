@@ -19,10 +19,14 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="d-flex justify-content-end align-items-center flex-wrap">
+        <P>お気に入り<%= render 'favorites/btn_blog', blog: @blog %></P>
+      </div>
       <h2 class=""><%= @blog.title %></h2>
       <div class="d-flex justify-content-end align-items-end flex-wrap">
         <p>
           <span>To <%= @blog.destination %>
+          <!--ブログカテゴリごとにアイコンを分けて表示-->
             <% case @blog.category %>
             <% when "ハイク" %>
               <i class="fas fa-hiking fa-2x"></i>
@@ -35,7 +39,6 @@
         </p>
         <p class="ml-3">出発日 <%= @blog.departed_date %></p>
       </div>
-
       <% if @packing %>
         <div class="text-right">
           <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -43,12 +46,20 @@
           </button>
           <div class="collapse" id="collapseExample">
             <div class="d-flex justify-content-end">
-              <%= render 'packings/card_packing', packing: @packing %>
+              <%= render 'packings/card', packing: @packing %>
             </div>
           </div>
         </div>
       <% end %>
-      <%=raw @blog.content %>
+      <%=sanitize @blog.content %>
+      <div class="card-footer text-muted text-right">
+        <% if @blog.created_at == @blog.updated_at %>
+          <span>Posted on <%= @blog.created_at.strftime("%Y-%m-%d") %></span>
+        <% else %>
+          <span>Updated on <%= @blog.updated_at.strftime("%Y-%m-%d") %></span>
+          <span>Posted on <%= @blog.created_at.strftime("%Y-%m-%d") %></span>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

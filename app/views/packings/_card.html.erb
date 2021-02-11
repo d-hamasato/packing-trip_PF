@@ -7,6 +7,10 @@
       <% else %>
         <%= image_tag "no_images/no_image_packing.jpg", class: "card-img-top" %>
       <% end %>
+      <!--お気に入りボタン-->
+      <div class="card-img-overlay">
+        <%= render 'favorites/btn_packing', packing: packing %>
+      </div>
       <div class="card-footer d-flex justify-content-end">
         <small class="text-muted">weight <%= Item.packing_items(packing).sum(:weight) %> g</small>
       </div>
