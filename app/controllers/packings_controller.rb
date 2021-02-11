@@ -1,7 +1,7 @@
 class PackingsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :create, :update, :destroy, :switch_status]
   before_action :correct_user, only: [:edit, :update, :destroy, :switch_status]
-  before_action :is_public?, only: [:show]
+  before_action :redirect_if_private, only: [:show]
 
   def new
     @packing = Packing.new
@@ -92,7 +92,7 @@ class PackingsController < ApplicationController
   end
 
   # 非公開のパッキング詳細ページはアイテムの所有ユーザーのみが参照できる
-  def is_public?
+  def redirect_if_private
     packing = Packing.find(params[:id])
     if packing.is_public? == false
       if user_signed_in? == false

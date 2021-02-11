@@ -20,16 +20,39 @@
 
 
 
-</div>
 
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
-
-      <p>To <%= @blog.destination %></p>
-      <p>旅のカテゴリ <%= @blog.category %></p>
       <h2 class=""><%= @blog.title %></h2>
-      <p class="text-right">出発日 <%= @blog.departed_date %></p>
+      <div class="d-flex justify-content-end align-items-end flex-nowrap">
+        <p>
+          <span>To <%= @blog.destination %>
+            <% case @blog.category %>
+            <% when "ハイク" %>
+              <i class="fas fa-hiking fa-2x"></i>
+            <% when "自転車" %>
+              <i class="fas fa-bicycle fa-2x"></i>
+            <% when "オートバイ" %>
+              <i class="fas fa-motorcycle fa-2x"></i>
+            <% end %>
+          </span>
+        </p>
+        <p class="ml-3">出発日 <%= @blog.departed_date %></p>
+      </div>
+
+      <% if @packing %>
+        <div class="text-right">
+          <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            持っていったパッキング
+          </button>
+          <div class="collapse" id="collapseExample">
+            <div class="d-flex justify-content-end">
+              <%= render 'packings/card_packing', packing: @packing %>
+            </div>
+          </div>
+        </div>
+      <% end %>
       <%=raw @blog.content %>
     </div>
   </div>
