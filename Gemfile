@@ -73,3 +73,8 @@ gem 'mini_magick'
 gem 'cocoon'
 # リッチテキストエディタ
 gem 'summernote-rails', '~> 0.8.10.0'
+gem 'dotenv-rails'
+
+group :production do
+  gem 'mysql2'
+end
