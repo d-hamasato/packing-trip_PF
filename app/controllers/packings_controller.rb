@@ -5,7 +5,7 @@ class PackingsController < ApplicationController
 
   def new
     @packing = Packing.new
-    @selectable_items = current_user.items.where(has?: true).pluck(:name, :id)
+    @selectable_items = current_user.items.where(has: true).pluck(:name, :id)
     # 現在ログイン中のユーザーが所持しているアイテムのみ、セレクトボックスに選択肢として表示する
   end
 
@@ -15,7 +15,7 @@ class PackingsController < ApplicationController
 
   def edit
     @packing = Packing.find(params[:id])
-    @selectable_items = current_user.items.where(has?: true).pluck(:name, :id)
+    @selectable_items = current_user.items.where(has: true).pluck(:name, :id)
     # 現在ログイン中のユーザーが所持しているアイテムのみ、セレクトボックスに選択肢として表示する
   end
 
@@ -73,7 +73,7 @@ class PackingsController < ApplicationController
       :description,
       :number_of_nights,
       :packing_img,
-      :is_public?,
+      :is_public,
       packing_items_attributes:[
         :id,
         :item_id,

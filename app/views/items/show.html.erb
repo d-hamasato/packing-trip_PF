@@ -21,14 +21,14 @@
               <% if @item.is_public? %>
                   <span>公開中</span>
                   <span><!--ステータスを非公開にするリンク-->
-                    <%= link_to switch_status_item_path(@item, item: {is_public?: false}), method: :patch do %>
+                    <%= link_to switch_status_item_path(@item, item: {is_public: false}), method: :patch do %>
                       <i class="fas fa-toggle-on fa-2x"></i>
                     <% end %>
                   </span>
               <% else %>
                   <span>非公開</span>
                   <span><!--ステータスを公開にするリンク-->
-                    <%= link_to switch_status_item_path(@item, item: {is_public?: true}), method: :patch do %>
+                    <%= link_to switch_status_item_path(@item, item: {is_public: true}), method: :patch do %>
                       <i class="fas fa-toggle-off fa-2x	"></i>
                     <% end %>
                   </span>
@@ -38,14 +38,14 @@
               <% if @item.has? %>
                   <span>このアイテムを持っている</span>
                   <span><!--ステータスを持っていないにするリンク-->
-                    <%= link_to switch_status_item_path(@item, item: {has?: false}), method: :patch do %>
+                    <%= link_to switch_status_item_path(@item, item: {has: false}), method: :patch do %>
                       <i class="fas fa-toggle-on fa-2x"></i>
                     <% end %>
                   </span>
               <% else %>
                 <span>いまはこのアイテムを持っていない</span>
                   <span><!--ステータスを持っているにするリンク-->
-                    <%= link_to switch_status_item_path(@item, item: {has?: true}), method: :patch do %>
+                    <%= link_to switch_status_item_path(@item, item: {has: true}), method: :patch do %>
                       <i class="fas fa-toggle-off fa-2x	"></i>
                     <% end %>
                   </span>

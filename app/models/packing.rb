@@ -9,11 +9,11 @@ class Packing < ApplicationRecord
 
   mount_uploader :packing_img, ItemImgUploader
 
-  scope :public_packings, -> { where(is_public?: true) }
-  
+  scope :public_packings, -> { where(is_public: true) }
+
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
-  end  
+  end
 
   enum number_of_nights: {
     '未選択': 0,

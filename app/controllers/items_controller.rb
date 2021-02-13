@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :create, :update, :destroy, :switch_status]
   before_action :correct_user, only: [:edit, :update, :destroy, :switch_status]
-  before_action :is_public?, only: [:show]
+  before_action :redirect_if_private, only: [:show]
 
   def new
     @item = Item.new
@@ -10,7 +10,6 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.user_id = current_user.id
-    # byebug
     if @item.save
       flash[:success] = "アイテムが追加されました"
       redirect_to item_path(@item)
@@ -63,7 +62,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :item_img, :weight, :is_public?, :has?)
+    params.require(:item).permit(:name, :description, :item_img, :weight, :is_public, :has)
   end
 
   def correct_user
@@ -74,7 +73,7 @@ class ItemsController < ApplicationController
   end
 
   # 非公開のアイテム詳細ページはアイテムの所有ユーザーのみが参照できる
-  def is_public?
+  def redirect_if_private
     item = Item.find(params[:id])
     if item.is_public? == false
       if user_signed_in? == false
