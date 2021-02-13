@@ -5,9 +5,9 @@ class ItemImgUploader < CarrierWave::Uploader::Base
 
   # process resize_to_limit: [640, 640]
 
-  version :thumb do
-    process resize_to_fill: [250, 166, "Center"]
-  end
+  # version :thumb do
+   # process resize_to_fill: [250, 166, "Center"]
+  # end
 
   # Choose what kind of storage to use for this uploader:
   storage :file
