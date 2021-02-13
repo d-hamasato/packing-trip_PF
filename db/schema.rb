@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2021_02_10_011921) do
     t.string "blog_tmb_img"
     t.text "content", null: false
     t.string "destination"
+    t.boolean "is_public", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["packing_id"], name: "index_blogs_on_packing_id"
@@ -67,8 +68,8 @@ ActiveRecord::Schema.define(version: 2021_02_10_011921) do
     t.text "description"
     t.string "item_img"
     t.integer "weight"
-    t.boolean "is_public?", default: true, null: false
-    t.boolean "has?", default: true, null: false
+    t.boolean "is_public", default: true, null: false
+    t.boolean "has", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
@@ -100,7 +101,7 @@ ActiveRecord::Schema.define(version: 2021_02_10_011921) do
     t.text "description"
     t.integer "number_of_nights", default: 0, null: false
     t.string "packing_img"
-    t.boolean "is_public?", default: true, null: false
+    t.boolean "is_public", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_packings_on_user_id"
