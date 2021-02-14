@@ -25,14 +25,12 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.find(params[:id])
-    # ブログに対するパッキングアイテムの紐付けはマストでないため、紐付いた公開中のパッキングが存在するときのみインスタンス変数を用意
+    @comment = Comment.new
+    # ブログに対するパッキングアイテムの紐付けはマストでないため
     if @blog.packing && @blog.packing.is_public?
       @packing = @blog.packing
       @items = Item.public_items.packing_items(@packing)
     end
-    # if @blog.blog_tmb_img #使うか検討中
-    #   @blog_top_image = @blog.blog_tmb_img.url
-    # end
   end
 
   def create

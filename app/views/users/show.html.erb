@@ -4,11 +4,7 @@
       <p>プロフィール</p>
       <div class="profile_img col-9 col-md-12 mx-auto mb-3">
         <!--プロフィール画像が登録されていればその画像、登録されていなければno_imageを表示-->
-        <% if @user.profile_img.present? %>
-          <%= image_tag @user.profile_img.url, class: "img-fluid img-profile rounded-circle" %>
-        <% else %>
-          <%= image_tag "no_images/no_image_profile.jpg", class: "img-fluid img-profile rounded-circle" %>
-        <% end %>
+        <%= render 'profile_img', user: @user %>
       </div>
       <p class="text-center"><%= @user.name %></p>
       <p><%= @user.introduction %></p>

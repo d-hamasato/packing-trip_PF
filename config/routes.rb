@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   end
   resources :blogs do
     resource :favorites, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy]
   end
   # ↓summernoteによるブログコンテンツ内の画像アップロードのため記述
   resources :uploads, only: [:create, :destroy]
