@@ -48,7 +48,7 @@
       <% @blog.comments.each do |comment| %>
         <% unless comment.parent_id %>
           <div class="row">
-            <div class="col-1 col-md-1">
+            <div class="col-1 col-md-1 px-0">
               <%= render 'users/profile_img', user: comment.user %>
             </div>
             <div class="col-10 col-md-10">
@@ -58,7 +58,7 @@
               <!--親コメントへのリプライ一覧-->
               <% comment.replies.each do |reply| %>
                 <div class="row">
-                  <div class="col-1 col-md-1 offset-ml-1">
+                  <div class="col-1 col-md-1 offset-ml-1 px-0">
                     <%= render 'users/profile_img', user: reply.user %>
                   </div>
                   <div class="col-9 col-md-9">
