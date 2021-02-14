@@ -12,6 +12,7 @@ class BlogsController < ApplicationController
 
   def index
     #非公開機能の追加は要検討
+    
     @blogs = Blog.all
   end
 
