@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
-  get 'favorites/create'
-  get 'favorites/destroy'
   devise_for :users
 
   root "static_pages#top"
   get "about" => "static_pages#about"
 
-  resources :users, only: [:show, :index, :edit, :update]
+  resources :users, only: [:show, :index, :edit, :update] do
+    member do
+      get :following
+      get :followers
+    end
+    resource :relationships,only: [:create, :destroy]
+  end
   resources :items do
     resource :favorites, only: [:create, :destroy]
     member do
@@ -23,6 +27,5 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
   end
-  # ↓summernoteによるブログコンテンツ内の画像アップロードのため記述
   resources :uploads, only: [:create, :destroy]
 end
