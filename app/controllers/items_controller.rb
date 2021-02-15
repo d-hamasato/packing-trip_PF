@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = current_user.items.new(item_params)
-    sent_tags = params[:item][:tag_name].split(nil)
+    sent_tags = params[:item][:tag_name].split(",")
     if @item.save
       @item.save_tag(sent_tags)
       flash[:success] = "アイテムが追加されました"
@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    sent_tags = params[:item][:tag_name].split(nil)
+    sent_tags = params[:item][:tag_name].split(",")
     if @item.update(item_params)
       @item.save_tag(sent_tags)
       flash[:success] = "アイテムが更新されました"
