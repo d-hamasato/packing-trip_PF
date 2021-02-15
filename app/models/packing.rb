@@ -2,7 +2,9 @@ class Packing < ApplicationRecord
 
   belongs_to :user
   has_many :blogs
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
+  has_many :tag_maps,  dependent: :destroy
+  has_many :tags, through: :tag_maps
   # gem 'cocoon'でpacking_itemも同時に登録する際、関係性をより明示的にするため inverse_of を記述
   has_many :packing_items, inverse_of: :packing, dependent: :destroy
   accepts_nested_attributes_for :packing_items, reject_if: :all_blank, allow_destroy: true

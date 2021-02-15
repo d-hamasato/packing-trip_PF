@@ -8,9 +8,10 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
-    @item.user_id = current_user.id
+    @item = current_user.items.new(item_params)
+    sent_tags = params[:item][:tag_name].split(nil)
     if @item.save
+      @item.save_tag(sent_tags)
       flash[:success] = "アイテムが追加されました"
       redirect_to item_path(@item)
     else
@@ -24,7 +25,9 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
+    sent_tags = params[:item][:tag_name].split(nil)
     if @item.update(item_params)
+      @item.save_tag(sent_tags)
       flash[:success] = "アイテムが更新されました"
       redirect_to item_path(@item)
     else
