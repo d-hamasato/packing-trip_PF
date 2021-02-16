@@ -1,0 +1,39 @@
+<%= form_with model: packing, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :name, "パッキング名" %>
+    <%= f.text_field :name, autofocus: true, placeholder: "例）日帰り登山", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, "パッキングの説明" %>
+    <%= f.text_area :description, placeholder: "例）夏の低山を想定しています。", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :number_of_nights, "何泊分？" %>
+    <%= f.select :number_of_nights, Packing.number_of_nights.keys, selected: packing.number_of_nights, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :packing_img, "パッキングの画像" %>
+    <%= f.file_field :packing_img, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :tag_name, "パッキングにタグを追加する場合はこちらに入力" %>
+    <% if packing.tags %>
+      <%= f.text_field :tag_name, value: packing.tags.pluck(:tag_name).join(","), class: "form-control tag_form" %>
+    <% else %>
+      <%= f.text_field :tag_name, class: "form-control tag_form" %>
+    <% end %>
+  </div>
+  <!--cocoonを使用したパッキングアイテムの登録フィールド-->
+  <div id="packing_items" class="form-group mt-5">
+    <%= f.fields_for :packing_items do |packing_item| %>
+      <%= render partial: 'packing_item_fields', locals: { f: packing_item, selectable_items: @selectable_items } %>
+    <% end %>
+    <!--アイテム追加のフィールドを増やすためのリンク-->
+    <div class='links'>
+      <%= link_to_add_association 'アイテムを追加', f, :packing_items %>
+    </div>
+  </div>
+  <div class="text-center">
+    <%= f.submit "送信", class: "btn btn-sm btn-success" %>
+  </div>
+<% end %>

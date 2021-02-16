@@ -4,6 +4,7 @@
       <div class="d-flex justify-content-end align-items-center flex-wrap">
         <P>お気に入り<%= render 'favorites/btn_blog', blog: @blog %></P>
       </div>
+      <%= render 'tags/tags', obj: @blog %>
       <h2 class=""><%= @blog.title %></h2>
       <div class="d-flex justify-content-end align-items-end flex-wrap">
         <p>

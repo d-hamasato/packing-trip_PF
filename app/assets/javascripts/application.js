@@ -48,12 +48,12 @@ $(document).on('turbolinks:load', function () {
   });
 });
 
-// ページ更新でtag-it発火
+// tag-it 編集ページ、タグ入力UI
 $(document).on('turbolinks:load', function() {
-  $(".tag_form").tagit({  // 指定のセレクタ( 今回は、:tag_list の text_field )に、tag-itを反映
+  $(".tag_form").tagit({
     tagLimit:10,         // タグの最大数
     singleField: true,   // タグの一意性
- // availableTags: ['ruby', 'rails', ..] 自動補完する一覧を設定できる(※ 配列ならok)。今回は、Ajax通信でDBの値を渡す(後述)。
+ // availableTags: ['ruby', 'rails', ..] 自動補完する一覧を設定できる(※ 配列ならok)。今回は未実装。
   });
   let tag_count = 10 - $(".tagit-choice").length    // 登録済みのタグを数える
   $(".ui-widget-content.ui-autocomplete-input").attr(

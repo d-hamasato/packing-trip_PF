@@ -10,6 +10,7 @@
     </div>
     <div class="card mx-auto mb-4" style="width: 25rem;">
       <div class="card-body">
+        <%= render 'tags/tags', obj: @packing %>
         <h4 class="card-title"><%= @packing.name %></h5>
         <h6 class="card-subtitle mb-2 text-muted">パッキング重量 <%= @packing_weight %> g</h6>
         <p class="card-text"><%= @packing.description %></p>
