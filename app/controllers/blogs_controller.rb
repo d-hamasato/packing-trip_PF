@@ -12,7 +12,7 @@ class BlogsController < ApplicationController
 
   def index
     #非公開機能の追加は要検討
-    
+
     @blogs = Blog.all
   end
 
@@ -35,7 +35,9 @@ class BlogsController < ApplicationController
 
   def create
     @blog = current_user.blogs.new(blog_params)
+    sent_tags = params[:blog][:tag_name].split(",")
     if @blog.save
+      @blog.save_tag(sent_tags)
       flash[:success] = "ブログが投稿されました"
       redirect_to blog_path(@blog)
     else
@@ -45,7 +47,9 @@ class BlogsController < ApplicationController
 
   def update
     @blog = Blog.find(params[:id])
+    sent_tags = params[:blog][:tag_name].split(",")
     if @blog.update(blog_params)
+      @blog.save_tag(sent_tags)
       flash[:success] = "ブログが更新されました"
       redirect_to blog_path(@blog)
     else

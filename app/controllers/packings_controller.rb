@@ -28,7 +28,9 @@ class PackingsController < ApplicationController
   end
 
   def create
+    sent_tags = params[:packing][:tag_name].split(",")
     if @packing = current_user.packings.create(packing_params)
+      @packing.save_tag(sent_tags)
       flash[:success] = "パッキングが追加されました"
       redirect_to packing_path(@packing)
     else
@@ -38,7 +40,9 @@ class PackingsController < ApplicationController
 
   def update
     @packing = Packing.find(params[:id])
+    sent_tags = params[:packing][:tag_name].split(",")
     if @packing.update(packing_params)
+      @packing.save_tag(sent_tags)
       flash[:success] = "パッキングが更新されました"
       redirect_to packing_path(@packing)
     else

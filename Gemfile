@@ -74,6 +74,8 @@ gem 'cocoon'
 # リッチテキストエディタ
 gem 'summernote-rails', '~> 0.8.10.0'
 gem 'dotenv-rails'
+# tag-it導入のため
+gem 'jquery-ui-rails'
 
 group :production do
   gem 'mysql2'
