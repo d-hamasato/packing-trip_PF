@@ -28,4 +28,5 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
   resources :uploads, only: [:create, :destroy]
+  get '/search_items', to: 'searches#search_items'
 end

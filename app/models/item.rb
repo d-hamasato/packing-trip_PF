@@ -39,4 +39,15 @@ class Item < ApplicationRecord
     end
   end
 
+  def self.search_for(search_word, tag_ids)
+    tag_items_id = TagMap.where(tag_id: tag_ids).pluck(:item_id).uniq
+    if search_word.present? && tag_ids.present?
+      self.where(id: tag_items_id).where('name LIKE ? or description LIKE ?', '%'+search_word+'%', '%'+search_word+'%')
+    elsif search_word.present?
+      self.where('name LIKE ? or description LIKE ?', '%'+search_word+'%', '%'+search_word+'%')
+    else
+      self.where(id: tag_items_id)
+    end
+  end
+
 end
