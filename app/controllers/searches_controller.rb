@@ -1,9 +1,16 @@
 class SearchesController < ApplicationController
   def search_items
-    search_word = params[:search_ward]
-    tags = params[:tag_ids].reject(&:blank?)
-    min_weight = params[:min_weight]
-    max_weight = params[:max_weight]
-    @items = Item.public_items.search_for(search_word, tags, min_weight, max_weight)
+    search_params = item_search_params
+    if search_params[:only_myitem]
+      @items = current_user.items.search(search_params)
+    else
+      @items = Item.public_items.search(search_params)
+    end
+  end
+
+  private
+
+  def item_search_params
+    params.fetch(:search, {}).permit(:word, :tag_ids, :min_weight, :max_weight, :only_myitem)
   end
 end

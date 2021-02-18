@@ -12,11 +12,14 @@
       </div>
       <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-          <%= form_with url: search_items_path, method: :get, local: true do |f| %>
-            <div class="form-group">
-              <%= f.search_field :search_ward, class: "form-control"%>
+          <%= form_with scope: :search, url: search_items_path, method: :get, local: true do |f| %>
+            <div class="custom-control custom-switch">
+              <%= f.check_box :only_myitem, {class: "custom-control-input"}, true, false %>
+              <%= f.label :only_myitem, "マイアイテムのみ表示する", class: "custom-control-label" %>
             </div>
-            <P>※重量で絞り込みを行う場合、最小重量と最大重量を両方入力してください</P>
+            <div class="form-group">
+              <%= f.search_field :word, class: "form-control"%>
+            </div>
             <div class="form-group">
               <%= f.label :min_weight, "最小重量(g)" %>
               <%= f.number_field :min_weight, min: 1, max: 5000 %>
@@ -26,7 +29,7 @@
               <%= f.number_field :max_weight, min: 1, max: 5000 %>
             </div>
             <div class="form-group">
-              <%= f.collection_check_boxes :tag_ids, Tag.item_tags, :id, :tag_name, class: "form-check form-check-inline" %>
+              <%= f.collection_check_boxes :tag_ids, Tag.item_tags, :id, :tag_name %>
             </div>
               <%= f.submit "絞り込み"%>
           <% end %>
