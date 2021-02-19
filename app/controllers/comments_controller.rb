@@ -1,17 +1,19 @@
 class CommentsController < ApplicationController
 
   def create
-    blog = Blog.find(params[:blog_id])
-    comment = current_user.comments.new(comment_params)
-    comment.blog_id = blog.id
-    if comment.save
-      redirect_to blog_path(blog)
-    end
+    # 非同期通信でのコメント投稿
+    @blog = Blog.find(params[:blog_id])
+    @comment_new = Comment.new
+    @comment = current_user.comments.new(comment_params)
+    @comment.blog_id = @blog.id
+    @comment.save
   end
 
   def destroy
-    Comment.find_by(id: params[:id], blog_id: params[:blog_id]).destroy
-    redirect_to blog_path(params[:blog_id])
+    # 非同期通信でのコメント削除
+    @blog = Blog.find(params[:blog_id])
+    @comment_new = Comment.new
+    Comment.find_by(id: params[:id], blog_id: @blog.id).destroy
   end
 
   private

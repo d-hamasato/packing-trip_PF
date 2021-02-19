@@ -25,7 +25,7 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.find(params[:id])
-    @comment = Comment.new
+    @comment_new = Comment.new
     # ブログに対するパッキングアイテムの紐付けはマストでないため
     if @blog.packing && @blog.packing.is_public?
       @packing = @blog.packing

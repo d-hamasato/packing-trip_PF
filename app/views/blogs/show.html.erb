@@ -43,72 +43,19 @@
           <span>Posted on <%= @blog.created_at.strftime("%Y-%m-%d") %></span>
         <% end %>
       </div>
-
       <!--コメント-->
-      <h5>コメント一覧</h5>
-      <% @blog.comments.each do |comment| %>
-        <% unless comment.parent_id %>
-          <div class="row">
-            <div class="col-1 col-md-1 px-0">
-              <%= render 'users/profile_img', user: comment.user %>
-            </div>
-            <div class="col-10 col-md-10">
-              <%= comment.user.name %>
-              <%= comment.created_at.strftime("%Y-%-m-%-d %H:%M") %>
-              <p><%= comment.content %></p>
-              <!--親コメントへのリプライ一覧-->
-              <% comment.replies.each do |reply| %>
-                <div class="row">
-                  <div class="col-1 col-md-1 offset-ml-1 px-0">
-                    <%= render 'users/profile_img', user: reply.user %>
-                  </div>
-                  <div class="col-9 col-md-9">
-                    <%= reply.user.name %>
-                    <%= reply.created_at.strftime("%Y-%-m-%-d %H:%M") %>
-                    <p><%= reply.content %></p>
-                  </div>
-                  <div class="col-1 col-md-1">
-                    <!--子コメントの削除ボタン-->
-                    <% if reply.user == current_user %>
-                      <%= link_to blog_comment_path(comment.blog_id, comment.id), method: :delete, data: { confirm: "本当に削除しますか？" } do %>
-                        <i class="fas fa-trash-alt fa-lg"></i>
-                      <% end %>
-                    <% end %>
-                  </div>
-                </div>
-              <% end %>
-              <!--コメントリプライのフォーム-->
-              <div class="">
-                <p class="text-right" type="button" data-toggle="collapse" data-target="#collapseReplyForm-<%= comment.id %>" aria-expanded="false" aria-controls="collapseReplyForm-<%= comment.id %>">
-                  コメントに返信する<i class="fas fa-reply fa-2x"></i>
-                </p>
-                <div class="collapse" id="collapseReplyForm-<%= comment.id %>">
-                    <div class="form-group">
-                      <%= form_with(model:[@blog, @comment], local:true) do |f| %>
-                        <%= f.text_area :content, rows:'3', placeholder: "返信コメントをここに", class: "form-control" %>
-                        <%= f.hidden_field :parent_id, value: comment.id %>
-                        <%= f.submit "送信する", class: "btn btn-sm btn-primary form-control" %>
-                      <% end %>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-1 col-md-1">
-              <!--親コメントの削除ボタン-->
-              <% if comment.user == current_user %>
-                <%= link_to blog_comment_path(comment.blog_id, comment.id), method: :delete, data: { confirm: "本当に削除しますか？" } do %>
-                  <i class="fas fa-trash-alt fa-2x"></i>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-      <div class="form-group ">
-        <%= form_with(model:[@blog, @comment], local:true) do |f| %>
-          <%= f.text_area :content, rows:'3', placeholder: "コメントをここに", class: "form-control" %>
-          <%= f.submit "送信する", class: "btn btn-primary form-control" %>
-        <% end %>
+      <div id="comment-aria">
+        <h5>コメント一覧</h5>
+        <div id="comments-index">
+          <%= render partial: 'comments/index', locals: { blog: @blog, comment_new: @comment_new }  %>
+        </div>
+        <!--コメントのフォーム-->
+        <div class="form-group">
+          <%= form_with(model:[@blog, @comment_new]) do |f| %>
+            <%= f.text_area :content, rows:'3', placeholder: "コメントをここに", class: "form-control comment_form" %>
+            <%= f.submit "送信する", class: "btn btn-primary form-control" %>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="col-md-2 col-lg-2">
