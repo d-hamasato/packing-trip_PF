@@ -13,6 +13,7 @@
         <%= render 'tags/tags', obj: @packing %>
         <h4 class="card-title"><%= @packing.name %></h5>
         <h6 class="card-subtitle mb-2 text-muted">パッキング重量 <%= @packing_weight %> g</h6>
+        <h6 class="badge badge-pill badge-info ml-auto"><%= @packing.number_of_nights %></h6>
         <p class="card-text"><%= @packing.description %></p>
         <ul class="list-group list-group-flush">
           <li class="list-group-item d-flex justify-content-between">

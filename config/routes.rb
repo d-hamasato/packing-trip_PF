@@ -29,4 +29,5 @@ Rails.application.routes.draw do
   end
   resources :uploads, only: [:create, :destroy]
   get '/search_items', to: 'searches#search_items'
+  get '/search_packings', to: 'searches#search_packings'
 end

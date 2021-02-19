@@ -13,10 +13,22 @@ class Packing < ApplicationRecord
 
   scope :public_packings, -> { where(is_public: true) }
 
+  # パッキング一覧ページの絞り込み
+  scope :search, -> (search_params) do
+    return if search_params.blank?
+    word_like(search_params[:word])
+      .tag_has(search_params[:tag_ids])
+      .number_of_nights_has(search_params[:selected_number_of_nights])
+  end
+  scope :word_like, -> (word) { where('name LIKE ? or description LIKE ?', '%'+word+'%', '%'+word+'%') if word.present? }
+  scope :number_of_nights_has, -> (selected_number_of_nights) { where(number_of_nights: selected_number_of_nights) if selected_number_of_nights.present? }
+  # collection_check_boxesの仕様により、tag_idsの配列の先頭に空文字がはいるため、tag_ids[1]でタグの選択があるかを判断
+  scope :tag_has, -> (tag_ids) { where(id: TagMap.where(tag_id: tag_ids).pluck(:packing_id).uniq) if tag_ids[1].present? }
+
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
-  
+
   # 送信されてきたタブ名から、既に存在するタブ名を除いて新しいタブのみ新規保存する。
   def save_tag(sent_tags)
     # current_tags = 対象オブジェクトに既に紐付いているタグ名
@@ -32,7 +44,7 @@ class Packing < ApplicationRecord
       new_tag = Tag.find_or_create_by(tag_name: new)
       self.tags << new_tag
     end
-  end  
+  end
 
   enum number_of_nights: {
     '未選択': 0,

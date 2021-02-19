@@ -1,8 +1,49 @@
 <div class="container">
   <h2 class="text-center">パッキング一覧</h2>
-  <div class="d-flex justify-content-around flex-wrap">
-    <% @packings.each do |packing| %>
-      <%= render 'card', packing: packing %>
-    <% end %>
+  <% if user_signed_in? %>
+    <!--パッキング絞り込みフィールド-->
+    <div class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              パッキングの絞り込み
+            </button>
+          </h5>
+        </div>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body">
+            <%= form_with scope: :search, url: search_packings_path, method: :get do |f| %>
+              <div class="d-flex justify-content-end mb-2">
+                <div class="custom-control custom-switch mr-3">
+                  <%= f.check_box :only_mypacking, {class: "custom-control-input"}, true, false %>
+                  <%= f.label :only_mypacking, "マイパッキングのみ表示する", class: "custom-control-label" %>
+                </div>
+                <%= f.submit "絞り込み条件のクリア", type: :reset, class: "btn btn-sm btn-outline-secondary" %>
+              </div>
+              <div class="form-group">
+                <%= f.search_field :word, placeholder: "検索ワードはこちら", class: "form-control"%>
+              </div>
+              <div class="form-group">
+                <%= f.label :selected_number_of_nights, "何泊分かで絞り込み" %>
+                <%= f.select :selected_number_of_nights, Packing.number_of_nights.keys, { class: "form-control", include_blank: true } %>
+              </div>
+              <p class="mt-3 mb-2">パッキングに関連付いたタグで絞り込み</p>
+              <div class="tag-checkbox-aria">
+                <div class="form-check">
+                  <%= f.collection_check_boxes :tag_ids, Tag.joins(:packings).uniq, :id, :tag_name, class: "form-check-input" %>
+                </div>
+              </div>
+              <div class="text-center">
+                <%= f.submit "絞り込み", class: "btn btn-success" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div id="index">
+    <%= render 'index', packings: @packings %>
   </div>
 </div>

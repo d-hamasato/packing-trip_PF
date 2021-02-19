@@ -14,7 +14,7 @@
         <h4 class="card-title"><%= @item.name %></h5>
         <h6 class="card-subtitle mb-2 text-muted"><%= @item.weight %> g</h6>
         <p class="card-text"><%= @item.description %></p>
-        <!--アイテムを所有するログインユーザーのみにステータス更新ボタン、編集ページへのリンク、アイテム削除リンクをひょうじする-->
+        <!--アイテムを所有するログインユーザーのみにステータス更新ボタン、編集ページへのリンク、アイテム削除リンクを表示する-->
         <% if user_signed_in? && @item.user_id == current_user.id %>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">アイテムステータス</li>
