@@ -11,6 +11,6 @@ class SearchesController < ApplicationController
   private
 
   def item_search_params
-    params.fetch(:search, {}).permit(:word, :tag_ids, :min_weight, :max_weight, :only_myitem)
+    params.fetch(:search, {}).permit(:word, :min_weight, :max_weight, :only_myitem, tag_ids: [])
   end
 end
