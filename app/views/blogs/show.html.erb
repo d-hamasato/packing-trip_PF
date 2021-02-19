@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
+    <div class="col-md-10 col-lg-8 mx-auto">
       <div class="d-flex justify-content-end align-items-center flex-wrap">
         <P>お気に入り<%= render 'favorites/btn_blog', blog: @blog %></P>
       </div>
@@ -110,7 +110,17 @@
           <%= f.submit "送信する", class: "btn btn-primary form-control" %>
         <% end %>
       </div>
-
+    </div>
+    <div class="col-md-2 col-lg-2">
+      <h5>Posted by..</h5>
+      <%= render 'users/profile', user: @blog.user %>
+      <div class="text-center mt-3">
+        <% if user_signed_in? && @blog.user == current_user %>
+          <%= link_to edit_blog_path(@blog), class: "btn btn-sm btn-success" do %>
+            <span style="color:whitesmoke;">ブログの編集 <i class="fas fa-edit" style="color:whitesmoke;"></i></span>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
