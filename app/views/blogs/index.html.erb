@@ -6,11 +6,8 @@
         <small>Secondary Text</small>
       </h1>
       <!--ブログ一覧-->
-      <div id="blog-index">
-        <% @blogs.each do |blog| %>
-          <%= render 'card', blog: blog %>
-        <% end %>
-        <%= paginate @blogs %>
+      <div id="index">
+        <%= render 'blogs/index', blogs: @blogs %>
       </div>
     </div>
     <!-- Sidebar Widgets Column -->
@@ -19,7 +16,7 @@
       <div class="card my-4">
         <h5 class="card-header">ブログ検索</h5>
         <div class="card-body">
-          <%= form_with scope: :search, url: search_blogs_path, method: :get, local: true do |f| %>
+          <%= form_with scope: :search, url: search_blogs_path, method: :get do |f| %>
             <div class="input-group">
               <%= f.search_field :word, placeholder: "検索ワードはこちら", class: "form-control"%>
               <span class="input-group-append">
@@ -33,13 +30,13 @@
       <div class="card my-4">
         <h5 class="card-header">ブログカテゴリー</h5>
           <div class="card-body">
-            <%= link_to search_blogs_path(search: {category: "ハイク"}) do %>
+            <%= link_to search_blogs_path(search: {category: "ハイク"}), remote: true do %>
               <span>ハイク<i class="fas fa-hiking fa-lg"></i></span>
             <% end %>
-            <%= link_to search_blogs_path(search: {category: "自転車"}) do %>
+            <%= link_to search_blogs_path(search: {category: "自転車"}), remote: true do %>
               <span class="ml-2">自転車<i class="fas fa-bicycle fa-lg"></i></span>
             <% end %>
-            <%= link_to search_blogs_path(search: {category: "オートバイ"}) do %>
+            <%= link_to search_blogs_path(search: {category: "オートバイ"}), remote: true do %>
               <span class="ml-2">オートバイ<i class="fas fa-motorcycle fa-lg"></i></span>
             <% end %>
           </div>
@@ -47,10 +44,10 @@
       <!-- タグ -->
       <div class="card my-4">
         <h5 class="card-header">ブログに関連付いた注目のタグ</h5>
-        <div class="card-body">
+        <div class="card-body d-flex flex-wrap">
           <% @tags.each do |tag| %>
             <!--collection_check_boxesの仕様と合わせるため、空文字のtag_idをパラメーターとして送っている-->
-            <%= link_to search_blogs_path(search: {tag_ids: ["", tag.id]}) do %>
+            <%= link_to search_blogs_path(search: {tag_ids: ["", tag.id]}), remote: true do %>
               <span class="tag">
                 <%= tag.tag_name %><span class="badge badge-light"><%= tag.blogs.count %></span>
               </span>
@@ -71,7 +68,7 @@
             </div>
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
               <div class="card-body">
-                <%= form_with scope: :search, url: search_blogs_path, method: :get, local: true do |f| %>
+                <%= form_with scope: :search, url: search_blogs_path, method: :get do |f| %>
                   <div class="d-flex justify-content-end mb-2">
                     <div class="custom-control custom-switch mr-3">
                       <%= f.check_box :only_myblog, {class: "custom-control-input"}, true, false %>

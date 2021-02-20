@@ -1,5 +1,7 @@
-<% obj.tags.each do |tag| %>
-  <span class="tag">
-    <%= tag.tag_name %>
-  </span>
-<% end %>
+<div class="d-flex flex-wrap">
+  <% obj.tags.each do |tag| %>
+    <span class="tag mb-1">
+      <%= tag.tag_name %>
+    </span>
+  <% end %>
+</div>
