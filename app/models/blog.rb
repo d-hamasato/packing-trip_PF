@@ -15,10 +15,27 @@ class Blog < ApplicationRecord
 
   mount_uploader :blog_tmb_img, BlogTmbImgUploader
 
+  # ブログ一覧ページの絞り込み
+  scope :search, -> (search_params) do
+    return if search_params.blank?
+    word_like(search_params[:word])
+      .category(search_params[:category])
+      .date_from(search_params[:min_date])
+      .date_to(search_params[:max_date])
+      .tag_has(search_params[:tag_ids])
+  end
+  scope :word_like, -> (word) { where('title LIKE ? or content LIKE ?', '%'+word+'%', '%'+word+'%') if word.present? }
+  scope :category, -> (category) { where(category: category) if category.present? }
+  scope :date_from, -> (min_date) { where('? <= departed_date', min_date) if min_date.present? }
+  scope :date_to, -> (max_date) { where('departed_date <= ? ', max_date) if max_date.present? }
+  # collection_check_boxesの仕様により、tag_idsの配列の先頭に空文字がはいるため、tag_ids[1]でタグの選択があるかを判断
+  # ワード検索のみのフォームから検索をかけた場合、tag_idsがnilとなるため、present?の条件が2つある
+  scope :tag_has, -> (tag_ids) { where(id: TagMap.where(tag_id: tag_ids).pluck(:blog_id).uniq) if tag_ids.present? && tag_ids[1].present? }
+
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
-  
+
   # 送信されてきたタブ名から、既に存在するタブ名を除いて新しいタブのみ新規保存する。
   def save_tag(sent_tags)
     # current_tags = 対象オブジェクトに既に紐付いているタグ名
@@ -34,7 +51,7 @@ class Blog < ApplicationRecord
       new_tag = Tag.find_or_create_by(tag_name: new)
       self.tags << new_tag
     end
-  end  
+  end
 
   enum category: {
     '未選択': 0,

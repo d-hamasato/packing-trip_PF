@@ -19,6 +19,16 @@ class SearchesController < ApplicationController
     end
   end
 
+  def search_blogs
+    search_params = blog_search_params
+    search_params[:min_date] =
+    if search_params[:only_myblog]
+      @blogs = current_user.blogs.search(search_params)
+    else
+      @blogs = Blog.search(search_params)
+    end
+  end
+
   private
 
   def item_search_params
@@ -27,5 +37,9 @@ class SearchesController < ApplicationController
 
   def packing_search_params
     params.fetch(:search, {}).permit(:word, :selected_number_of_nights, :only_mypacking, tag_ids: [])
+  end
+
+  def blog_search_params
+    params.fetch(:search, {}).permit(:word, :category, :min_date, :max_date, :only_myblog, tag_ids: [])
   end
 end

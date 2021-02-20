@@ -25,16 +25,18 @@
     <!-- Sidebar Widgets Column -->
     <div class="col-md-4">
 
-      <!--ブログ検索-->
+      <!--ブログ、ワード検索-->
       <div class="card my-4">
         <h5 class="card-header">ブログ検索</h5>
         <div class="card-body">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for...">
-            <span class="input-group-append">
-              <button class="btn btn-secondary" type="button">Go!</button>
-            </span>
-          </div>
+          <%= form_with scope: :search, url: search_blogs_path, method: :get, local: true do |f| %>
+            <div class="input-group">
+              <%= f.search_field :word, placeholder: "検索ワードはこちら", class: "form-control"%>
+              <span class="input-group-append">
+                <%= f.submit "Go!", class: "btn btn-secondary" %>
+              </span>
+            </div>
+          <% end %>
         </div>
       </div>
 
@@ -62,11 +64,65 @@
 
       <!-- Side Widget -->
       <div class="card my-4">
-        <h5 class="card-header">タグ</h5>
+        <h5 class="card-header">ブログに関連付いた注目のタグ</h5>
         <div class="card-body">
-          タグの一覧を表示
+          <% @tags.each do |tag| %>
+            <%= render 'tags/with_counts', tag: tag %>
+          <% end %>
         </div>
       </div>
+
+      <!--詳細検索-->
+      <% if user_signed_in? %>
+        <div class="accordion" id="accordionExample">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  ブログ詳細検索
+                </button>
+              </h5>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body">
+                <%= form_with scope: :search, url: search_blogs_path, method: :get, local: true do |f| %>
+                  <div class="d-flex justify-content-end mb-2">
+                    <div class="custom-control custom-switch mr-3">
+                      <%= f.check_box :only_myblog, {class: "custom-control-input"}, true, false %>
+                      <%= f.label :only_myblog, "自分のブログのみ表示", class: "custom-control-label" %>
+                    </div>
+                    <%= f.submit "絞り込み条件のクリア", type: :reset, class: "btn btn-sm btn-outline-secondary" %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.search_field :word, placeholder: "検索ワードはこちら", class: "form-control"%>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label :category, "カテゴリーで絞り込み" %>
+                    <%= f.select :category, Blog.categories.keys, { class: "form-control", include_blank: true } %>
+                  </div>
+                  <p class="mt-3 mb-2">出発日で絞り込み</p>
+                  <div class="form-group">
+                    <%= f.date_field :min_date, class: "form-control" %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label :max_date, "〜" %>
+                    <%= f.date_field :max_date, class: "form-control" %>
+                  </div>
+                  <p class="mt-3 mb-2">ブログに関連付いたタグで絞り込み</p>
+                  <div class="tag-checkbox-aria">
+                    <div class="form-check">
+                      <%= f.collection_check_boxes :tag_ids, Tag.blogs.order(:tag_name), :id, :tag_name, class: "form-check-input" %>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <%= f.submit "絞り込み", class: "btn btn-success" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
 
     </div>
 
