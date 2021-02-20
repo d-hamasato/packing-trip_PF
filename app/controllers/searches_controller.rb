@@ -25,7 +25,7 @@ class SearchesController < ApplicationController
     if search_params[:only_myblog]
       @blogs = current_user.blogs.search(search_params)
     else
-      @blogs = Blog.search(search_params)
+      @blogs = Blog.search(search_params).order(created_at: :DESC).page(params[:page]).per(5)
     end
   end
 

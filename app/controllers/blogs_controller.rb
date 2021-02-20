@@ -12,7 +12,7 @@ class BlogsController < ApplicationController
 
   def index
     #非公開機能の追加は要検討
-    @blogs = Blog.order(created_at: :DESC)
+    @blogs = Blog.page(params[:page]).reverse_order.per(2)
     @tags = Tag.blogs.hottest
   end
 
