@@ -21,7 +21,6 @@ class SearchesController < ApplicationController
 
   def search_blogs
     search_params = blog_search_params
-    search_params[:min_date] =
     if search_params[:only_myblog]
       @blogs = current_user.blogs.search(search_params).page(params[:page]).reverse_order.per(10)
     else

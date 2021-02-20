@@ -36,7 +36,11 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.public_items
+    if params[:user_id]
+      @items = User.find(params[:user_id]).items.page(params[:page]).reverse_order.per(20)
+    else
+      @items = Item.public_items.page(params[:page]).reverse_order.per(20)
+    end
   end
 
   def show

@@ -10,7 +10,11 @@ class PackingsController < ApplicationController
   end
 
   def index
-    @packings = Packing.public_packings
+    if params[:user_id]
+      @packings = User.find(params[:user_id]).packings.page(params[:page]).reverse_order.per(8)
+    else
+      @packings = Packing.public_packings.page(params[:page]).reverse_order.per(8)
+    end
   end
 
   def edit

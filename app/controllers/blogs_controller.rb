@@ -12,7 +12,11 @@ class BlogsController < ApplicationController
 
   def index
     #非公開機能の追加は要検討
-    @blogs = Blog.page(params[:page]).reverse_order.per(5)
+    if params[:user_id]
+      @blogs = User.find(params[:user_id]).blogs.page(params[:page]).reverse_order.per(5)
+    else
+      @blogs = Blog.page(params[:page]).reverse_order.per(5)
+    end
     @tags = Tag.blogs.hottest
   end
 
