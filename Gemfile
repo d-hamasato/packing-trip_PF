@@ -78,6 +78,9 @@ gem 'dotenv-rails'
 gem 'jquery-ui-rails'
 # ページング
 gem 'kaminari','~> 1.2.1'
+# ダミーseedデータの作成
+gem 'faker'
+gem 'gimei'
 
 group :production do
   gem 'mysql2'
