@@ -10,8 +10,15 @@
   </head>
 
   <body>
-    <%= render "layouts/header" %>
+    <header>
+      <%= render "layouts/header" %>
+    </header>
     <%= render 'layouts/flash' %>
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
+    <footer  id="footer">
+      <%= render 'layouts/footer' %>
+    </footer>
   </body>
 </html>

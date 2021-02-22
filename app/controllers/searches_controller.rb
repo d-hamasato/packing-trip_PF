@@ -28,6 +28,15 @@ class SearchesController < ApplicationController
     end
   end
 
+  def search_users
+    search_params = user_search_params
+    if search_params[:order_followers]
+      @users = User.order_followers.search(search_params).page(params[:page]).per(20)
+    else
+      @users = User.search(search_params).page(params[:page]).reverse_order.per(20)
+    end
+  end
+
   private
 
   def item_search_params
@@ -40,5 +49,9 @@ class SearchesController < ApplicationController
 
   def blog_search_params
     params.fetch(:search, {}).permit(:word, :category, :min_date, :max_date, :only_myblog, tag_ids: [])
+  end
+
+  def user_search_params
+    params.fetch(:search, {}).permit(:word, :order_followers)
   end
 end

@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    if params[:following_id]#ヘッダーのフォロー中ユーザーからの遷移
+      @users = User.find(params[:following_id]).following.reverse_order.page(params[:page]).per(9)
+    elsif params[:followed_id]#フォローボタン下、""人がフォロー中からの遷移
+      @users = User.find(params[:followed_id]).followers.reverse_order.page(params[:page]).per(9)
+    else
+      @users = User.page(params[:page]).reverse_order.per(9)
+    end
   end
 
   def edit
@@ -13,8 +19,6 @@ class UsersController < ApplicationController
     if user_signed_in? && @user.id == current_user.id
       @items = @user.items
       @packings = @user.packings
-      # @packing = Packing.find(2)#カード作成のため
-      # @packing_weight = Item.packing_items(@packing).sum(:weight)
     else
       @items = @user.items.public_items
       @packings = @user.packings.public_packings

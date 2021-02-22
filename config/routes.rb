@@ -31,4 +31,5 @@ Rails.application.routes.draw do
   get '/search_items' => 'searches#search_items'
   get '/search_packings' => 'searches#search_packings'
   get '/search_blogs' => 'searches#search_blogs'
+  get '/search_users' => 'searches#search_users'
 end
