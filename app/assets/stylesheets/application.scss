@@ -15,6 +15,7 @@
  *= require tagit.ui-zendesk
  *= require_self
  */
+
 // bootstrapのカスタマイズ
 $blue: #007bff;
 $indigo: #6610f2;
@@ -41,7 +42,6 @@ $grays: (100: $gray-100, 200: $gray-200, 300: $gray-300, 400: $gray-400, 500: $g
 $theme-colors: (primary: $purple, secondary: $gray-600, success: $green, info: $cyan, warning: $orange, danger: $red, light: $gray-100, dark: $gray-700);
 $colors: (blue: $blue, indigo: $indigo, purple: $purple, pink: $pink, red: $red, orange: $orange, yellow: $yellow, green: $green, teal: $teal, cyan: $cyan, white: $white, gray: $gray-600,gray-dark: $gray-800);
 $theme-color-interval: 8%;
-
 // Body
 $body-bg: #F2F5F5;
 $body-color: $gray-900;
@@ -57,7 +57,7 @@ $body-color: $gray-900;
 }
 
 body {
-  padding-top: 56px;
+  padding-top: 51px;
   display: flex;
   flex-flow: column;
   min-height: 100vh;
@@ -75,34 +75,51 @@ footer {
     text-align: center;
   }
 }
-// a {
-//   color: #000;
 
-//   &:visited {
-//     color: rgb(181, 181, 181);
-//   }
-
-//   // &:hover {
-//   //   columns: #000;
-//   //   background-color: #fff;
-//   // }
-// }
+.navbar-custom {
+  background-color: rgba(127, 123, 129, 0.9);
+}
+.navbar-custom .navbar-brand {
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  font-weight: 700;
+}
+.navbar-custom .navbar-nav .nav-item .nav-link {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+}
 
 // topページ skipperによるスライド
 #box{
   height: 400px;
 }
 .skipper_image1 {
-  background-image: image-url("top_skipper/test1.jpg");
+  background-image: image-url("top_skipper/top1.jpg");
 }
 .skipper_image2 {
-  background-image: image-url("top_skipper/test2.jpg");
+  background-image: image-url("top_skipper/top2.jpg");
 }
 .skipper_image3 {
-  background-image: image-url("top_skipper/test3.jpg");
+  background-image: image-url("top_skipper/top3.jpg");
 }
 .skipper_image4 {
-  background-image: image-url("top_skipper/test4.jpg");
+  background-image: image-url("top_skipper/top4.jpg");
+}
+
+#top-user-aria {
+  padding-top: 15px;
+  background-color: #594E65;
+  text-align: center;
+  h2 {
+    text-align: center;
+    color: #ced4da;
+  }
+  .top-user-aria-text {
+    color: #ced4da;
+  }
 }
 
 // タグ

@@ -8,7 +8,7 @@
     <!--お気に入りボタン-->
     <div class="card-img-overlay">
       <%= render 'favorites/btn_blog', blog: blog %>
-      <span class="favorites-count">お気に入り <%= blog.favorites.count %></span>
+      <span class="favorites-count">お気に入り数 <%= blog.favorites.count %></span>
     </div>
   </div>
   <div class="card-body">
@@ -28,7 +28,7 @@
       </p>
       <p class="ml-3">出発日 <%= blog.departed_date %></p>
     </div>
-    <!--ブログの本文の冒頭を指定数文字以下で表示（htmlタグ非表示）-->
+    <!--ブログの本文の冒頭を指定数文字以下で表示（htmlタグha非表示）-->
     <p class="card-text"><%=strip_tags blog.content[0, 200] %><%= " .." if blog.content.length > 50 %></p>
     <%= link_to "Read More →", blog_path(blog), class: "btn btn-primary" %>
   </div>

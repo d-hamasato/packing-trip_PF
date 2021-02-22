@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
   <div class="container">
     <!--<%= link_to root_path, class: "navbar-brand" do %>-->
     <!--  <%= image_tag 'logo_white.png', class: "d-inline-block align-top", width: "30", height: "30" %><span> packing-trip</span>-->
@@ -9,7 +9,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
+        <li class="nav-item">
           <%= link_to "旅のブログ", blogs_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
@@ -43,7 +43,7 @@
             <%= link_to "アカウント作成", new_user_registration_path, class: "nav-link" %>
           </li>
           <li class="nav-item active">
-            <%= link_to " ログイン", user_session_path, method: :post, class: "nav-link" %>
+            <%= link_to " ログイン", new_user_session_path, class: "nav-link" %>
           </li>
         <% end %>
       </ul>

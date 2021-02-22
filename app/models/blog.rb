@@ -32,6 +32,11 @@ class Blog < ApplicationRecord
   # ワード検索のみのフォームから検索をかけた場合、tag_idsがnilとなるため、present?の条件が2つある
   scope :tag_has, -> (tag_ids) { where(id: TagMap.where(tag_id: tag_ids).pluck(:blog_id).uniq) if tag_ids.present? && tag_ids[1].present? }
 
+  # 引数(number)を上限に、お気に入り数が多い順に直近投稿100件からブログを取得する。（本来は何日前までの投稿としたいがPFのためこの仕様）
+  def self.hottest(number)
+    self.joins(:favorites).order(id: "DESC").limit(100).group(:blog_id).order(Arel.sql('count(blog_id) desc')).limit(number)
+  end
+
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
