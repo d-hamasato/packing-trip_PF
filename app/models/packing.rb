@@ -9,7 +9,7 @@ class Packing < ApplicationRecord
   has_many :packing_items, inverse_of: :packing, dependent: :destroy
   accepts_nested_attributes_for :packing_items, reject_if: :all_blank, allow_destroy: true
 
-  mount_uploader :packing_img, ItemImgUploader
+  mount_uploader :packing_img, PackingImgUploader
 
   scope :public_packings, -> { where(is_public: true) }
 

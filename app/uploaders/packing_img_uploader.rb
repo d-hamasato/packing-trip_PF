@@ -6,7 +6,7 @@ class PackingImgUploader < CarrierWave::Uploader::Base
   process resize_to_limit: [640, 640]
 
   version :thumb do
-    process resize_to_fill: [500, 360, "Center"]
+    process resize_to_fill: [640, 424, "Center"]
   end
 
   # Choose what kind of storage to use for this uploader:
