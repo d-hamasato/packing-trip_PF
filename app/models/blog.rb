@@ -29,12 +29,16 @@ class Blog < ApplicationRecord
   scope :date_from, -> (min_date) { where('? <= departed_date', min_date) if min_date.present? }
   scope :date_to, -> (max_date) { where('departed_date <= ? ', max_date) if max_date.present? }
   # collection_check_boxesの仕様により、tag_idsの配列の先頭に空文字がはいるため、tag_ids[1]でタグの選択があるかを判断
-  # ワード検索のみのフォームから検索をかけた場合、tag_idsがnilとなるため、present?の条件が2つある
   scope :tag_has, -> (tag_ids) { where(id: TagMap.where(tag_id: tag_ids).pluck(:blog_id).uniq) if tag_ids.present? && tag_ids[1].present? }
 
   # 引数(number)を上限に、お気に入り数が多い順に直近投稿100件からブログを取得する。（本来は何日前までの投稿としたいがPFのためこの仕様）
   def self.hottest(number)
     self.joins(:favorites).order(id: "DESC").limit(100).group(:blog_id).order(Arel.sql('count(blog_id) desc')).limit(number)
+  end
+
+  # 引数のユーザーがお気に入り楼録しているブログを返す。
+  def self.favorites(user)
+    self.joins(:favorites).where(favorites: { user_id: user})
   end
 
   def favorited_by?(user)

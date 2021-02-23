@@ -32,4 +32,5 @@ Rails.application.routes.draw do
   get '/search_packings' => 'searches#search_packings'
   get '/search_blogs' => 'searches#search_blogs'
   get '/search_users' => 'searches#search_users'
+  get '/search_all_contents' => 'searches#search_all_contents'
 end

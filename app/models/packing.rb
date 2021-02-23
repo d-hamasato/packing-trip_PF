@@ -23,7 +23,12 @@ class Packing < ApplicationRecord
   scope :word_like, -> (word) { where('name LIKE ? or description LIKE ?', '%'+word+'%', '%'+word+'%') if word.present? }
   scope :number_of_nights_has, -> (selected_number_of_nights) { where(number_of_nights: selected_number_of_nights) if selected_number_of_nights.present? }
   # collection_check_boxesの仕様により、tag_idsの配列の先頭に空文字がはいるため、tag_ids[1]でタグの選択があるかを判断
-  scope :tag_has, -> (tag_ids) { where(id: TagMap.where(tag_id: tag_ids).pluck(:packing_id).uniq) if tag_ids[1].present? }
+  scope :tag_has, -> (tag_ids) { where(id: TagMap.where(tag_id: tag_ids).pluck(:packing_id).uniq) if tag_ids.present? && tag_ids[1].present? }
+
+  # 引数のユーザーがお気に入り楼録しているパッキングを返す。
+  def self.favorites(user)
+    self.joins(:favorites).where(favorites: { user_id: user})
+  end
 
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
