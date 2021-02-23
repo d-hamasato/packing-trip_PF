@@ -18,10 +18,18 @@
         <li class="nav-item">
           <%= link_to "アイテム", items_path, class: "nav-link" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "ユーザー一覧", users_path, class: "nav-link" %>
-        </li>
         <% if user_signed_in? %>
+        <li class="nav-item">
+          <!--アイテム、パッキング、ブログ、フリーワード検索フォーム-->
+          <%= form_with scope: :search, url: search_all_contents_path, method: :get, local: true do |f| %>
+            <div class="input-group">
+              <%= f.search_field :word, placeholder: "検索ワードはこちら", class: "form-control"%>
+              <span class="input-group-append">
+                <%= f.submit "Go!", class: "btn btn-primary" %>
+              </span>
+            </div>
+          <% end %>
+        </li>
           <li class="nav-item dropdown ml-3">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <%= current_user.name %>
@@ -31,7 +39,8 @@
               <%= link_to "新しいパッキングの作成", new_packing_path, class: "dropdown-item" %>
               <%= link_to "マイアイテムの追加", new_item_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "お気に入り一覧", "#", class: "dropdown-item" %>
+              <%= link_to "お気に入り一覧", search_all_contents_path(search: {only_myfavorites: true}), class: "dropdown-item" %>
+              <%= link_to "ユーザー一覧", users_path, class: "dropdown-item" %>
               <%= link_to "フォロー中のユーザー", users_path(following_id: current_user.id), class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "マイページ", user_path(current_user.id), class: "dropdown-item" %>

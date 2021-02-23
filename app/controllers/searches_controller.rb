@@ -37,6 +37,19 @@ class SearchesController < ApplicationController
     end
   end
 
+  def search_all_contents
+    search_params = all_contents_search_params
+    if search_params[:only_myfavorites]
+      @blogs = Blog.favorites(current_user).search(search_params).page(params[:page]).reverse_order.per(10)
+      @packings = Packing.favorites(current_user).search(search_params)
+      @items = Item.favorites(current_user).search(search_params)
+    else
+      @blogs = Blog.search(search_params).page(params[:page]).reverse_order.per(10)
+      @packings = Packing.public_packings.search(search_params)
+      @items = Item.public_items.search(search_params)
+    end
+  end
+
   private
 
   def item_search_params
@@ -54,4 +67,9 @@ class SearchesController < ApplicationController
   def user_search_params
     params.fetch(:search, {}).permit(:word, :order_followers)
   end
+
+  def all_contents_search_params
+    params.fetch(:search, {}).permit(:word, :only_myfavorites, tag_ids: [])
+  end
+
 end

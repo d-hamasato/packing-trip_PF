@@ -17,7 +17,7 @@ class BlogsController < ApplicationController
     else
       @blogs = Blog.page(params[:page]).reverse_order.per(5)
     end
-    @tags = Tag.blogs.hottest
+    @tags = Tag.blogs.hottest(20)
   end
 
   def edit
