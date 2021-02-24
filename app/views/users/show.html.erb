@@ -1,10 +1,10 @@
-<div class="container">
+<div class="container page-top">
   <div class="row justify-content-center">
     <div class="col-md-2 ">
       <p>プロフィール</p>
       <%= render 'profile', user: @user %>
       <div class="text-center mt-3">
-        <%= link_to "投稿ブログ一覧", blogs_path(user_id: @user), class: "btn btn-info" %>
+        <%= link_to "投稿ブログ一覧", blogs_path(user_id: @user), class: "btn btn-block btn-primary" %>
       </div>
     </div>
     <div class="col-md-10">
@@ -12,7 +12,7 @@
         <div class="d-flex flex-wrap mb-3">
           <h5>マイアイテム</h5>
           <!--items#indexに@userのアイテムのみ表示させるリンク-->
-          <span class="ml-3"><%= link_to "一覧", items_path(user_id: @user), class: "btn btn-sm btn-info" %></span>
+          <span class="ml-3"><%= link_to "一覧", items_path(user_id: @user), class: "btn btn-sm btn-outline-primary" %></span>
         </div>
         <!--アイテム一覧をoverflowを用いて横スクロールで表示-->
         <div class="d-flex flex-row flex-nowrap overflow-auto">
@@ -27,7 +27,7 @@
         <div class="d-flex flex-wrap">
           <h5>マイパッキング</h5>
           <!--packings#indexに@userのパッキングのみ表示させるリンク-->
-          <span class="ml-3"><%= link_to "一覧", packings_path(user_id: @user), class: "btn btn-sm btn-info" %></span>
+          <span class="ml-3"><%= link_to "一覧", packings_path(user_id: @user), class: "btn btn-sm btn-outline-primary" %></span>
         </div>
         <div class="d-flex flex-row flex-nowrap overflow-auto">
           <% @packings.each do |packing| %>

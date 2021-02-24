@@ -1,11 +1,15 @@
-<div class="container">
+<div class="container page-top">
   <div class="row">
     <div class="col-md-10 col-lg-8 mx-auto">
       <div class="d-flex justify-content-end align-items-center flex-wrap">
         <P>お気に入り<%= render 'favorites/btn_blog', blog: @blog %></P>
       </div>
-      <%= render 'tags/tags', obj: @blog %>
-      <h2 class=""><%= @blog.title %></h2>
+      <div class="mb-2">
+        <%= render 'tags/tags', obj: @blog %>
+      </div>
+      <div class="card-header">
+        <h2 class=""><%= @blog.title %></h2>
+      </div>
       <div class="d-flex justify-content-end align-items-end flex-wrap">
         <p>
           <span>To <%= @blog.destination %>
@@ -24,7 +28,8 @@
       </div>
       <% if @packing %>
         <div class="text-right">
-          <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#collapsePacking" aria-expanded="false" aria-controls="collapsePacking">
+          <span>check it! <i class="far fa-hand-point-right"></i></span>
+          <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapsePacking" aria-expanded="false" aria-controls="collapsePacking">
             持っていったパッキング
           </button>
           <div class="collapse" id="collapsePacking">
@@ -44,7 +49,7 @@
         <% end %>
       </div>
       <!--コメント-->
-      <div id="comment-aria">
+      <div id="comment-aria" class="page-top">
         <h5>コメント一覧</h5>
         <div id="comments-index">
           <%= render partial: 'comments/index', locals: { blog: @blog, comment_new: @comment_new }  %>
@@ -52,7 +57,7 @@
         <!--コメントのフォーム-->
         <div class="form-group">
           <%= form_with(model:[@blog, @comment_new]) do |f| %>
-            <%= f.text_area :content, rows:'3', placeholder: "コメントをここに", class: "form-control comment_form" %>
+            <%= f.text_area :content, rows:'3', placeholder: "コメントはここに入力", class: "form-control comment_form" %>
             <%= f.submit "送信する", class: "btn btn-primary form-control" %>
           <% end %>
         </div>
@@ -63,7 +68,7 @@
       <%= render 'users/profile', user: @blog.user %>
       <div class="text-center mt-3">
         <% if user_signed_in? && @blog.user == current_user %>
-          <%= link_to edit_blog_path(@blog), class: "btn btn-sm btn-success" do %>
+          <%= link_to edit_blog_path(@blog), class: "btn btn-sm btn-block btn-primary" do %>
             <span style="color:whitesmoke;">ブログの編集 <i class="fas fa-edit" style="color:whitesmoke;"></i></span>
           <% end %>
         <% end %>

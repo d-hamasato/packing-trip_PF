@@ -1,5 +1,5 @@
 <%= render 'layouts/errors', obj: @user %>
-<div class="container">
+<div class="container page-top">
   <div class="row">
     <div class="col-md-6 mx-auto">
       <h2 class="text-center">ユーザー登録情報の変更</h2>
@@ -19,7 +19,7 @@
           <%= f.file_field :profile_img, class: "form-control" %>
         </div>
         <div class="text-center">
-          <%= f.submit "変更を保存", class: "btn btn-sm btn-success" %>
+          <%= f.submit "変更を保存", class: "btn btn-outline-primary" %>
         </div>
       <% end %>
     </div>

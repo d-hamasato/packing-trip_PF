@@ -9,8 +9,7 @@
     <%= f.select :qty, [*(1..10)], selected: 1, class: "form-control" %>
   </li>
   </ul>
-  <li class="list-group-item d-flex justify-content-end">
-    <%= link_to_remove_association "削除", f, class: "btn btn-sm btn-danger" %>
-  </li>
-  </ul>
+</div>
+<div class="text-right mt-0 mb-3">
+  <%= link_to_remove_association "削除", f, class: "btn btn-sm btn-danger" %>
 </div>

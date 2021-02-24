@@ -62,34 +62,46 @@ body {
   flex-flow: column;
   min-height: 100vh;
 }
+
+// フッターがbodyの高さに関係なく画面最下部になるように
 main {
   flex: 1;
 }
 footer {
   margin-top: 20px;
   padding: 5px, 0;
-  background-color: #7F7B81;
+  background-color: $gray-700;
   p {
-    color: #e9ecef;
+    color: $gray-200;
     margin-bottom: 0;
     text-align: center;
   }
 }
 
+.page-top {
+  margin-top: 24px;
+}
+
+.pagination {
+  justify-content: center;
+}
+
 .navbar-custom {
   background-color: rgba(127, 123, 129, 0.9);
+  height: 54px;
 }
 .navbar-custom .navbar-brand {
-  text-transform: uppercase;
   font-size: 1rem;
   letter-spacing: 0.1rem;
   font-weight: 700;
 }
 .navbar-custom .navbar-nav .nav-item .nav-link {
-  text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.1rem;
+}
+.navbar-custom .search {
+  margin-right: auto;
 }
 
 // topページ skipperによるスライド
@@ -122,6 +134,14 @@ footer {
   }
 }
 
+// fontAwesomeのアイコン色
+.fa-toggle-on {
+  color: $purple;
+}
+.fa-home {
+  color: #800080;
+}
+
 // タグ
 .tag{
   padding: 3px;
@@ -138,14 +158,30 @@ footer {
   border-radius: 5px;
 }
 
-.pagination {
-  justify-content: center;
-}
-
-.favorites-count {
+// いいね数、コメント数の背景色透過クラス
+.count {
   padding: 5px;
   border-radius: 4px;
   color: white;
   background-color: rgba(91,91,91,0.50);
 }
 
+// ブログコメントの吹き出し
+.balloon{
+  background-color: #e9ecef;
+  position: relative;
+  padding: 10px;
+  border-radius: 10px;
+}
+.balloon::before{
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  left: -15px;
+  top: 20px;
+  border-right: 15px solid #e9ecef;
+  border-top: 5px solid transparent;
+  border-bottom: 15px solid transparent;
+}

@@ -1,0 +1,97 @@
+<div class="accordion" id="accordionExample">
+
+  <h5 class="mb-0 text-right">
+    <button class="btn btn-outline-primary" id="headingOne" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+      絞り込み
+    </button>
+  </h5>
+  <div class="card mb-4">
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <% case obj %>
+        <% when [@blogs, @packings, @items] %>
+          <%= form_with scope: :search, url: search_all_contents_path, method: :get, local:true do |f| %>
+            <div class="d-flex justify-content-end mb-2">
+              <div class="custom-control custom-switch mr-3">
+                <%= f.check_box :only_myfavorites, {class: "custom-control-input"}, true, false %>
+                <%= f.label :only_myfavorites, "お気に入りのみ表示する", class: "custom-control-label" %>
+              </div>
+              <%= f.submit "絞り込み条件のクリア", type: :reset, class: "btn btn-sm btn-outline-secondary" %>
+            </div>
+            <div class="form-group">
+              <%= f.search_field :word, placeholder: "検索ワードはこちら", class: "form-control"%>
+            </div>
+            <p class="mt-3 mb-2">タグで絞り込み</p>
+            <div class="tag-checkbox-aria">
+              <div class="form-check">
+                <!--タグ付け数の多いタグ50を、名前順に表示-->
+                <%= f.collection_check_boxes :tag_ids, Tag.joins(:tag_maps).group(:tag_id).hottest(50).order(:tag_name), :id, :tag_name, class: "form-check-input" %>
+              </div>
+            </div>
+            <div class="text-center">
+              <%= f.submit "絞り込み", class: "btn btn-outline-primary" %>
+            </div>
+          <% end %>
+        <% when @items %>
+          <%= form_with scope: :search, url: search_items_path, method: :get do |f| %>
+            <div class="d-flex justify-content-end mb-2">
+              <div class="custom-control custom-switch mr-3">
+                <%= f.check_box :only_myitem, {class: "custom-control-input"}, true, false %>
+                <%= f.label :only_myitem, "マイアイテムのみ表示する", class: "custom-control-label" %>
+              </div>
+              <%= f.submit "絞り込み条件のクリア", type: :reset, class: "btn btn-sm btn-outline-secondary" %>
+            </div>
+            <div class="form-group">
+              <%= f.search_field :word, placeholder: "検索ワードはこちら", class: "form-control"%>
+            </div>
+            <div class="row">
+              <div class="col">
+                <%= f.label :min_weight, "最小重量(g)" %>
+                <%= f.number_field :min_weight, min: 1, max: 5000, class: "form-control" %>
+              </div>
+              <div class="col">
+                <%= f.label :max_weight, "最大重量(g)" %>
+                <%= f.number_field :max_weight, min: 1, max: 5000, class: "form-control" %>
+              </div>
+            </div>
+            <p class="mt-3 mb-2">アイテムに関連付いたタグで絞り込み</p>
+            <div class="tag-checkbox-aria">
+              <div class="form-check">
+                <%= f.collection_check_boxes :tag_ids, Tag.joins(:items).uniq, :id, :tag_name, class: "form-check-input" %>
+              </div>
+            </div>
+            <div class="text-center">
+              <%= f.submit "絞り込み", class: "btn btn-outline-primary" %>
+            </div>
+          <% end %>
+        <% when @packings %>
+          <%= form_with scope: :search, url: search_packings_path, method: :get do |f| %>
+            <div class="d-flex justify-content-end mb-2">
+              <div class="custom-control custom-switch mr-3">
+                <%= f.check_box :only_mypacking, {class: "custom-control-input"}, true, false %>
+                <%= f.label :only_mypacking, "マイパッキングのみ表示する", class: "custom-control-label" %>
+              </div>
+              <%= f.submit "絞り込み条件のクリア", type: :reset, class: "btn btn-sm btn-outline-secondary" %>
+            </div>
+            <div class="form-group">
+              <%= f.search_field :word, placeholder: "検索ワードはこちら", class: "form-control"%>
+            </div>
+            <div class="form-group">
+              <%= f.label :selected_number_of_nights, "何泊分かで絞り込み" %>
+              <%= f.select :selected_number_of_nights, Packing.number_of_nights.keys, { class: "form-control", include_blank: true } %>
+            </div>
+            <p class="mt-3 mb-2">パッキングに関連付いたタグで絞り込み</p>
+            <div class="tag-checkbox-aria">
+              <div class="form-check">
+                <%= f.collection_check_boxes :tag_ids, Tag.joins(:packings).uniq, :id, :tag_name, class: "form-check-input" %>
+              </div>
+            </div>
+            <div class="text-center">
+              <%= f.submit "絞り込み", class: "btn btn-outline-primary" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -30,10 +30,10 @@
     <% end %>
     <!--アイテム追加のフィールドを増やすためのリンク-->
     <div class='links'>
-      <%= link_to_add_association 'アイテムを追加', f, :packing_items %>
+      <%= link_to_add_association 'アイテムを追加', f, :packing_items, class: "btn btn-sm btn-warning text-white"%>
     </div>
   </div>
   <div class="text-center">
-    <%= f.submit "送信", class: "btn btn-sm btn-success" %>
+    <%= f.submit "送信", class: "btn btn-sm btn-outline-primary" %>
   </div>
 <% end %>
