@@ -190,3 +190,8 @@ footer {
   border-top: 5px solid transparent;
   border-bottom: 15px solid transparent;
 }
+
+// Blogs#nes, edit ページのsummernoteのヘルパーの文字がフッター下に表示されてしまうため打ち消し
+.ui-helper-hidden-accessible {
+  display: none;
+}
