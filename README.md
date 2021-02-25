@@ -4,7 +4,7 @@
 旅のブログをメインコンテンツとしたSNSです。<br>
 その旅のパッキング内容、アイテムをブログ記事に関連づけることができ、見た人がパッキングや道具の参考にできるようにしました。<br>
 マイアイテム、マイパッキング機能も用意し、自身のパッキングリストの作成など旅に出る前の準備にも活用できます。<br>
-いいねや、ユーザーのフォロー、DM機能があることでSNSらしいコミュニケーションを取ることが可能です。<br>
+いいねや、ユーザーのフォロー機能があることでSNSらしいコミュニケーションを取ることが可能です。<br>
 ※このアプリケーションにおいて「パッキング」＝　「旅に持っていく道具のリスト、旅の荷造り」と定義しています。
 
 ### サイトテーマ
@@ -21,13 +21,12 @@
 - パッキングの参考に、他ユーザーの旅ブログやパッキングリストを参照する
 - パッキングリストを作成して忘れ物チェック
 - いい道具がないかの検索（重量を条件に検索できる）
-- 旅に出るなかまの募集（実装の優先順位は低いため、後半の進捗次第て着手）
 
 ## 設計書
-- [機能一覧(Googleスプレッドシートが開きます)](https://docs.google.com/spreadsheets/d/1IIK4spgb3w0cVXS6PsZMzgDguZubS90E3qQx6NWRPU8/edit#gid=0)
-- [ER図(未確定のためダミーリンク)](#)
-- [テーブル定義書(未確定のためダミーリンク)](#)
-- [アプリケーション詳細設計(未確定のためダミーリンク)](#)
+- [機能一覧(Googleスプレッドシート)](https://docs.google.com/spreadsheets/d/1IIK4spgb3w0cVXS6PsZMzgDguZubS90E3qQx6NWRPU8/edit?usp=sharing)
+- [ER図](https://drive.google.com/file/d/1L19Md93zfzRwxPJd_s500LSxSADMmuAw/view?usp=sharing)
+- [テーブル定義書(Googleスプレッドシート)](https://drive.google.com/file/d/1srOg9YIWEgS71aPm1OSiRAb0jqZnQZSZ/view?usp=sharing)
+- [アプリケーション詳細設計(Googleスプレッドシート)](https://drive.google.com/file/d/12wHQoi0iIzxY7oGDvix1olaH_2BU-7JA/view?usp=sharing)
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -37,4 +36,5 @@
 - IDE：Cloud9
 
 ## 使用素材
-- フリー画像を使用予定です。使用サイトは随時加筆していきます。
+- [Unsplash(フリー画像)](https://unsplash.com/)
+- [DesignEvo(ロゴジェネレーター、サイトロゴはこちらで作成しました。)](https://www.designevo.com/jp/)
