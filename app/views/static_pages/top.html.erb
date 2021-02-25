@@ -7,6 +7,11 @@
     <div class="skipper_image4"></div>
   </div>
 </div>
+<% unless user_signed_in? %>
+  <div id="guest-login">
+    <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-primary btn-xl p-3 rounded-pill" %>
+  </div>
+<% end %>
 <section>
   <div class="container">
     <div class="row align-items-center">

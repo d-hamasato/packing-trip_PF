@@ -64,13 +64,9 @@ class PackingsController < ApplicationController
   # 公開非公開のステータス変更
   def switch_status
     packing = Packing.find(params[:id])
-    if packing.update(packing_params)
-      flash[:success] = "ステータスを変更しました"
-      redirect_to packing_path(packing)
-    else
-      flash[:success] = "ステータス変更に失敗しました"
-      redirect_to packing_path(packing)
-    end
+    packing.update(packing_params)
+    flash[:success] = "ステータスを変更しました"
+    redirect_to packing_path(packing)
   end
 
   private

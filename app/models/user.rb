@@ -29,6 +29,14 @@ class User < ApplicationRecord
   end
   scope :word_like, -> (word) { where('users.name LIKE ? or users.introduction LIKE ?', '%'+word+'%', '%'+word+'%') if word.present? }
 
+  # ゲストログインボタンが押された際のメソッド(Users::SessionsController)
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.name = "ゲストユーザー"
+      user.password = SecureRandom.urlsafe_base64
+    end
+  end
+
   def following?(user)
     following.include?(user)
   end

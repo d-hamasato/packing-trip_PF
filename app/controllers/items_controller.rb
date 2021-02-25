@@ -57,13 +57,9 @@ class ItemsController < ApplicationController
 
   def switch_status
     item = Item.find(params[:id])
-    if item.update(item_params)
-      flash[:success] = "ステータスを変更しました"
-      redirect_to item_path(item)
-    else
-      flash[:success] = "ステータス変更に失敗しました"
-      redirect_to item_path(item)
-    end
+    item.update(item_params)
+    flash[:success] = "ステータスを変更しました"
+    redirect_to item_path(item)
   end
 
   private
