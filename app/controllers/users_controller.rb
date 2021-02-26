@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :check_guest, only: :edit
+
   def index
     if params[:following_id]#ヘッダーのフォロー中ユーザーからの遷移
       @users = User.find(params[:following_id]).following.reverse_order.page(params[:page]).per(9)
@@ -34,10 +36,17 @@ class UsersController < ApplicationController
       render "edit"
     end
   end
-end
 
   private
 
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_img)
   end
+
+  def check_guest
+    if current_user.email = 'guest@example.com'
+      flash[:warning] = "ゲストユーザーは編集できません"
+      redirect_to user_path(current_user)
+    end
+  end
+end
