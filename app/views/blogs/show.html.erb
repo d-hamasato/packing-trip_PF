@@ -39,7 +39,7 @@
           </div>
         </div>
       <% end %>
-      <%=sanitize @blog.content %>
+      <%=raw @blog.content %>
       <div class="card-footer text-muted text-right">
         <% if @blog.created_at == @blog.updated_at %>
           <span>Posted on <%= @blog.created_at.strftime("%Y-%m-%d") %></span>
