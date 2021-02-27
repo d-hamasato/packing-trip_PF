@@ -89,20 +89,33 @@ footer {
 .navbar-custom {
   background-color: rgba(127, 123, 129, 0.9);
   height: 54px;
+  .navbar-brand {
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    font-weight: 700;
+  }
+  .navbar-nav .nav-item .nav-link {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+  }
+  .my-page {
+    margin-left: 10px;
+  }
 }
-.navbar-custom .navbar-brand {
-  font-size: 1rem;
-  letter-spacing: 0.1rem;
-  font-weight: 700;
+@media (max-width: 991.98px) {
+  .navbar-custom {
+    .navbar-collapse-bg {
+      margin-top: 5px;
+      padding: 0 10px 5px 10px;
+      background-color: rgba(127, 123, 129, 0.9);
+    }
+    .my-page {
+      margin-left: 0;
+    }
+  }
 }
-.navbar-custom .navbar-nav .nav-item .nav-link {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.1rem;
-}
-.navbar-custom .search {
-  margin-right: auto;
-}
+
 
 // topページ skipperによるスライド
 #box{

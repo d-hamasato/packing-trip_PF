@@ -4,7 +4,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
+    <div class="collapse navbar-collapse navbar-collapse-bg" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <%= link_to "旅のブログ", blogs_path, class: "nav-link" %>
@@ -27,8 +27,8 @@
               </div>
             <% end %>
           </li>
-          <li class="nav-item">
-            <%= link_to user_path(current_user.id), class: "nav-link ml-3" do %>
+          <li class="nav-item my-page">
+            <%= link_to user_path(current_user.id), class: "nav-link" do %>
               マイページ <i class="fas fa-home"></i>
             <% end %>
           </li>

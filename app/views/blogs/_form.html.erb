@@ -30,6 +30,7 @@
         <div class="form-group">
           <%= f.label :tag_name, "ブログにタグを追加する場合はこちらに入力" %>
           <% if @blog.tags %>
+            <!--既にブログタグがついていたら、tag-itのUIが適用される形で表示する-->
             <%= f.text_field :tag_name, value: @blog.tags.pluck(:tag_name).join(","), class: "form-control tag_form" %>
           <% else %>
             <%= f.text_field :tag_name, class: "form-control tag_form" %>
@@ -40,7 +41,7 @@
           <%= f.text_area :content, 'data-provider': :summernote %>
         </div>
         <div class="text-center">
-          <%= f.submit @submit_text, class: "btn btn-sm btn-success" %>
+          <%= f.submit @submit_text, class: "btn btn-sm btn-outline-primary" %>
         </div>
       <% end %>
     </div>

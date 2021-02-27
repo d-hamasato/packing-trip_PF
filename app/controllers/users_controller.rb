@@ -44,9 +44,9 @@ class UsersController < ApplicationController
   end
 
   def check_guest
-    if current_user.email = 'guest@example.com'
+    if current_user.email == 'guest@example.com'
       flash[:warning] = "ゲストユーザーは編集できません"
-      redirect_to user_path(current_user)
+      redirect_back fallback_location: root_path
     end
   end
 end
