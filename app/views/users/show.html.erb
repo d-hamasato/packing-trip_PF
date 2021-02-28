@@ -3,7 +3,7 @@
     <div class="col-md-2 ">
       <p>プロフィール</p>
       <%= render 'profile', user: @user %>
-      <div class="text-center mt-3">
+      <div class="text-center mt-3 mb-4">
         <%= link_to "投稿ブログ一覧", blogs_path(user_id: @user), class: "btn btn-block btn-primary" %>
       </div>
     </div>
