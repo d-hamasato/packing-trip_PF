@@ -1,0 +1,9 @@
+<div class="d-flex flex-wrap">
+  <% obj.tags.each do |tag| %>
+    <%= link_to search_all_contents_path(search: {tag_ids: ["", tag.id]}) do %>
+      <span class="tag">
+        <%= tag.tag_name %>
+      </span>
+    <% end %>
+  <% end %>
+</div>

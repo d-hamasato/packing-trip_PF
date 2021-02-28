@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1 class="my-4">旅のブログ一覧
+        <!--<small>Secondary Text</small>-->
+      </h1>
+      <!--ブログ一覧-->
+      <div id="index">
+        <%= render 'blogs/index', blogs: @blogs %>
+      </div>
+    </div>
+    <!-- Sidebar Widgets Column -->
+    <div class="col-md-4">
+      <!--ブログ、ワード検索-->
+      <div class="card my-4">
+        <h5 class="card-header">ブログ検索</h5>
+        <div class="card-body">
+          <%= form_with scope: :search, url: search_blogs_path, method: :get do |f| %>
+            <div class="input-group">
+              <%= f.search_field :word, placeholder: "検索ワードはこちら", class: "form-control"%>
+              <span class="input-group-append">
+                <%= f.submit "Go!", class: "btn btn-secondary" %>
+              </span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <!--ブログカテゴリごとの記事一覧リンク-->
+      <div class="card my-4">
+        <h5 class="card-header">ブログカテゴリー</h5>
+          <div class="card-body">
+            <%= link_to search_blogs_path(search: {category: "ハイク"}), remote: true do %>
+              <span>ハイク<i class="fas fa-hiking fa-lg"></i></span>
+            <% end %>
+            <%= link_to search_blogs_path(search: {category: "自転車"}), remote: true do %>
+              <span class="ml-2">自転車<i class="fas fa-bicycle fa-lg"></i></span>
+            <% end %>
+            <%= link_to search_blogs_path(search: {category: "オートバイ"}), remote: true do %>
+              <span class="ml-2">オートバイ<i class="fas fa-motorcycle fa-lg"></i></span>
+            <% end %>
+          </div>
+      </div>
+      <!-- 注目のタグ -->
+      <div class="card my-4">
+        <h5 class="card-header">ブログに関連付いた注目のタグ</h5>
+        <div class="card-body d-flex flex-wrap">
+          <% @tags.each do |tag| %>
+            <!--collection_check_boxesの仕様と合わせるため、空文字のtag_idをパラメーターとして送っている-->
+            <%= link_to search_blogs_path(search: {tag_ids: ["", tag.id]}), remote: true do %>
+              <span class="tag">
+                <%= tag.tag_name %><span class="badge badge-light"><%= tag.blogs.count %></span>
+              </span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <!--詳細検索-->
+      <% if user_signed_in? %>
+        <div class="accordion" id="accordionExample">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  ブログ詳細検索
+                </button>
+              </h5>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body">
+                <%= form_with scope: :search, url: search_blogs_path, method: :get do |f| %>
+                  <div class="d-flex justify-content-end mb-2">
+                    <div class="custom-control custom-switch mr-3">
+                      <%= f.check_box :only_myblog, {class: "custom-control-input"}, true, false %>
+                      <%= f.label :only_myblog, "自分のブログのみ表示", class: "custom-control-label" %>
+                    </div>
+                    <%= f.submit "絞り込み条件のクリア", type: :reset, class: "btn btn-sm btn-outline-secondary" %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.search_field :word, placeholder: "検索ワードはこちら", class: "form-control"%>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label :category, "カテゴリーで絞り込み" %>
+                    <%= f.select :category, Blog.categories.keys, { class: "form-control", include_blank: true } %>
+                  </div>
+                  <p class="mt-3 mb-2">出発日で絞り込み</p>
+                  <div class="form-group">
+                    <%= f.date_field :min_date, class: "form-control" %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label :max_date, "〜" %>
+                    <%= f.date_field :max_date, class: "form-control" %>
+                  </div>
+                  <p class="mt-3 mb-2">ブログに関連付いたタグで絞り込み</p>
+                  <div class="tag-checkbox-aria">
+                    <div class="form-check">
+                      <%= f.collection_check_boxes :tag_ids, Tag.blogs.order(:tag_name), :id, :tag_name, class: "form-check-input" %>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <%= f.submit "絞り込み", class: "btn btn-outline-primary" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

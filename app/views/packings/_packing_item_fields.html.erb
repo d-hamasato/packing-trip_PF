@@ -1,0 +1,16 @@
+<div class='nested-fields mb-2'>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item d-flex justify-content-between">
+      <%= f.label :item_id, "アイテム選択" %>
+      <%= f.select :item_id, @selectable_items, class: "form-control" %>
+    </li>
+    <li class="list-group-item d-flex justify-content-between">
+      <%= f.label :qty, "数量選択" %>
+      <%= f.select :qty, [*(1..10)], selected: 1, class: "form-control" %>
+    </li>
+    </ul>
+    <li class="d-flex justify-content-end mt-1">
+      <%= link_to_remove_association "削除", f, class: "btn btn-sm btn-danger" %>
+    </li>
+  </ul>
+</div>

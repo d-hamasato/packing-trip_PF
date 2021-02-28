@@ -1,0 +1,23 @@
+<div class="container page-top">
+  <h2 class="text-center">ユーザー一覧</h2>
+  <div class="col-md-4 ml-auto mb-3">
+    <%= form_with scope: :search, url: search_users_path, method: :get do |f| %>
+      <div class="custom-control custom-switch mr-3">
+        <%= f.check_box :order_followers, {class: "custom-control-input"}, true, false %>
+        <%= f.label :order_followers, "フォロワーが多い順に並び替える", class: "custom-control-label" %>
+      </div>
+      <div class="input-group">
+        <%= f.search_field :word, placeholder: "ユーザー名、自己紹介文から検索", class: "form-control"%>
+        <span class="input-group-append">
+          <%= f.submit "Go!", class: "btn btn-secondary" %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+  <div id="index" class="card-columns">
+    <%= render 'users/index', users: @users %>
+  </div>
+  <div id="paginate">
+    <%= paginate @users %>
+  </div>
+</div>

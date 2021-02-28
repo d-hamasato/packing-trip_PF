@@ -1,0 +1,210 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require jquery.tagit
+ *= require tagit.ui-zendesk
+ *= require_self
+ */
+
+// bootstrapのカスタマイズ
+$blue: #007bff;
+$indigo: #6610f2;
+$purple: #594E65;
+$pink: #e83e8c;
+$red: #C4545A;
+$orange: #DCA57A;
+$yellow: #ffc107;
+$green: #A1A594;
+$teal: #20c997;
+$cyan: #009CB0;
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #868e96;
+$gray-700: #7F7B81;//変更
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000;
+$grays: (100: $gray-100, 200: $gray-200, 300: $gray-300, 400: $gray-400, 500: $gray-500, 600: $gray-600, 700: $gray-700, 800: $gray-800, 900: $gray-900);
+$theme-colors: (primary: $purple, secondary: $gray-600, success: $green, info: $cyan, warning: $orange, danger: $red, light: $gray-100, dark: $gray-700);
+$colors: (blue: $blue, indigo: $indigo, purple: $purple, pink: $pink, red: $red, orange: $orange, yellow: $yellow, green: $green, teal: $teal, cyan: $cyan, white: $white, gray: $gray-600,gray-dark: $gray-800);
+$theme-color-interval: 8%;
+// Body
+$body-bg: #F2F5F5;
+$body-color: $gray-900;
+@import "bootstrap";
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+@import "summernote-bs4";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #6c6b6b;
+}
+
+body {
+  padding-top: 54px;
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+// フッターがbodyの高さに関係なく画面最下部になるように
+main {
+  flex: 1;
+}
+footer {
+  margin-top: 20px;
+  padding: 5px, 0;
+  background-color: $gray-700;
+  p {
+    color: $gray-200;
+    margin-bottom: 0;
+    text-align: center;
+  }
+}
+
+.page-top {
+  margin-top: 24px;
+}
+
+.pagination {
+  justify-content: center;
+}
+
+.navbar-custom {
+  background-color: rgba(127, 123, 129, 0.9);
+  height: 54px;
+  .navbar-brand {
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    font-weight: 700;
+  }
+  .navbar-nav .nav-item .nav-link {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+  }
+  .my-page {
+    margin-left: 10px;
+  }
+}
+@media (max-width: 991.98px) {
+  .navbar-custom {
+    .navbar-collapse-bg {
+      margin-top: 5px;
+      padding: 0 10px 5px 10px;
+      background-color: rgba(127, 123, 129, 0.9);
+    }
+    .my-page {
+      margin-left: 0;
+    }
+  }
+}
+
+
+// topページ skipperによるスライド
+#box{
+  height: 400px;
+}
+.skipper_image1 {
+  background-image: image-url("top_skipper/top1.jpg");
+}
+.skipper_image2 {
+  background-image: image-url("top_skipper/top2.jpg");
+}
+.skipper_image3 {
+  background-image: image-url("top_skipper/top3.jpg");
+}
+.skipper_image4 {
+  background-image: image-url("top_skipper/top4.jpg");
+}
+#guest-login {
+  background-color: $gray-700;
+  text-align: center;
+  padding: 10px;
+}
+
+#top-user-aria {
+  padding-top: 15px;
+  background-color: #594E65;
+  text-align: center;
+  h2 {
+    text-align: center;
+    color: #ced4da;
+  }
+  .top-user-aria-text {
+    color: #ced4da;
+  }
+}
+
+// fontAwesomeのアイコン色
+.fa-toggle-on {
+  color: $purple;
+}
+.fa-home {
+  color: #800080;
+}
+
+// タグ
+.tag{
+  padding: 3px;
+  margin-left: 3px;
+  font-size: 13px;
+  color: white;
+  background-color: #DCA57A;
+  border-radius: 5px;
+}
+.tag-checkbox-aria{
+  padding-top: 5px;
+  margin-bottom: 10px;
+  background-color: #fcf8e8;
+  border-radius: 5px;
+}
+
+// いいね数、コメント数の背景色透過クラス
+.count {
+  padding: 5px;
+  border-radius: 4px;
+  color: white;
+  background-color: rgba(91,91,91,0.50);
+}
+
+// ブログコメントの吹き出し
+.balloon{
+  background-color: #e9ecef;
+  position: relative;
+  padding: 10px;
+  border-radius: 10px;
+}
+.balloon::before{
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  left: -15px;
+  top: 20px;
+  border-right: 15px solid #e9ecef;
+  border-top: 5px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+
+// Blogs#nes, edit ページのsummernoteのヘルパーの文字がフッター下に表示されてしまうため打ち消し
+.ui-helper-hidden-accessible {
+  display: none;
+}

@@ -1,0 +1,49 @@
+<div class="card mb-4">
+  <div class="card">
+    <% if blog.blog_tmb_img.present? %>
+      <%= image_tag blog.blog_tmb_img.url, class: "card-img-top" %>
+    <% else %>
+      <%= image_tag "no_images/750x300.png", class: "card-img-top" %>
+    <% end %>
+    <div class="card-img-overlay">
+      <!--お気に入りボタン-->
+      <%= render 'favorites/btn_blog', blog: blog %>
+      <span class="count">お気に入り <%= blog.favorites.count %></span><br>
+      <!--コメントがついていたらコメント数表示-->
+      <% if blog.comments.present? %>
+        <i class="fas fa-comments fa-2x" style="color:darkslategraycd ;"></i>
+        <span class="count">コメント <%= blog.comments.count %></span>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-body">
+    <h2 class="card-title"><%= blog.title %></h2>
+    <div class="card-text d-flex justify-content-end align-items-end flex-wrap">
+      <p>
+        <span>To <%= blog.destination %>
+          <% case blog.category %>
+          <% when "ハイク" %>
+            <i class="fas fa-hiking fa-lg"></i>
+          <% when "自転車" %>
+            <i class="fas fa-bicycle fa-lg"></i>
+          <% when "オートバイ" %>
+            <i class="fas fa-motorcycle fa-lg"></i>
+          <% end %>
+        </span>
+      </p>
+      <p class="ml-3">出発日 <%= blog.departed_date %></p>
+    </div>
+    <!--ブログの本文の冒頭を指定数文字以下で表示（htmlタグha非表示）-->
+    <p class="card-text"><%=strip_tags blog.content[0, 200] %> ..</p>
+    <div class="d-flex justify-content-end">
+      <%= link_to "Read More →", blog_path(blog), class: "btn btn-outline-primary" %>
+    </div>
+  </div>
+  <div class="card-footer text-muted text-right">
+    <% if blog.created_at == blog.updated_at %>
+      <span>Posted on <%= blog.created_at.strftime("%Y-%m-%d") %></span>
+    <% else %>
+      <span>Updated on <%= blog.updated_at.strftime("%Y-%m-%d") %></span>
+    <% end %>
+  </div>
+</div>

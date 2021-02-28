@@ -1,0 +1,11 @@
+<% if user_signed_in? %>
+  <% if blog.favorited_by?(current_user) %>
+    <%= link_to blog_favorites_path(blog), method: :delete do %>
+      <i class="fas fa-heart fa-2x" style="color:indianred;"></i>
+    <% end %>
+  <% else %>
+    <%= link_to blog_favorites_path(blog), method: :post do %>
+      <i class="far fa-heart fa-2x" style="color:indianred;"></i>
+    <% end %>
+  <% end %>
+<% end %>

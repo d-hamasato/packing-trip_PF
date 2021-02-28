@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+  <div class="container">
+    <%= link_to "packing-trip", root_path, class: "navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse navbar-collapse-bg" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <%= link_to "旅のブログ", blogs_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "パッキング", packings_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "アイテム", items_path, class: "nav-link" %>
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item search">
+            <!--アイテム、パッキング、ブログ、フリーワード検索フォーム-->
+            <%= form_with scope: :search, url: search_all_contents_path, method: :get, local: true do |f| %>
+              <div class="input-group">
+                <%= f.search_field :word, placeholder: "search for..", class: "form-control"%>
+                <span class="input-group-append">
+                  <%= f.submit "Go!", class: "btn btn-primary" %>
+                </span>
+              </div>
+            <% end %>
+          </li>
+          <li class="nav-item my-page">
+            <%= link_to user_path(current_user.id), class: "nav-link" do %>
+              マイページ <i class="fas fa-home"></i>
+            <% end %>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= current_user.name %>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <%= link_to "ブログの作成", new_blog_path, class: "dropdown-item" %>
+              <%= link_to "新しいパッキングの作成", new_packing_path, class: "dropdown-item" %>
+              <%= link_to "マイアイテムの追加", new_item_path, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "お気に入り一覧", search_all_contents_path(search: {only_myfavorites: true}), class: "dropdown-item" %>
+              <%= link_to "ユーザー一覧", users_path, class: "dropdown-item" %>
+              <%= link_to "フォロー中のユーザー", users_path(following_id: current_user.id), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            </div>
+          </li>
+        <% else %>
+          <li class="nav-item ml-3">
+            <%= link_to "アカウント作成", new_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to " ログイン", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

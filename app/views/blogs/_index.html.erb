@@ -1,0 +1,4 @@
+<% blogs.each do |blog| %>
+  <%= render 'blogs/card', blog: blog %>
+<% end %>
+<%= paginate blogs %>

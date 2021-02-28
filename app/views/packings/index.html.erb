@@ -1,0 +1,10 @@
+<div class="container page-top">
+  <h2 class="text-center">パッキング一覧</h2>
+  <% if user_signed_in? %>
+    <!--パッキング絞り込みフィールド-->
+    <%= render 'searches/advanced_form', obj: @packings %>
+  <% end %>
+  <div id="index">
+    <%= render 'index', packings: @packings %>
+  </div>
+</div>

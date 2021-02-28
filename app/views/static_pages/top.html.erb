@@ -1,0 +1,106 @@
+<!--skipperによるスライド-->
+<div id="box">
+  <div id="images">
+    <div class="skipper_image1"></div>
+    <div class="skipper_image2"></div>
+    <div class="skipper_image3"></div>
+    <div class="skipper_image4"></div>
+  </div>
+</div>
+<% unless user_signed_in? %>
+  <div id="guest-login">
+    <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-primary btn-xl p-3 rounded-pill" %>
+  </div>
+<% end %>
+<section>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-5 order-lg-2">
+        <div class="p-5">
+          <%= image_tag 'logo.png', class: "img-fluid rounded-circle" %>
+        </div>
+      </div>
+      <div class="col-lg-7 order-lg-1">
+        <div class="p-5">
+          <h2 class="display-4">旅のブログから<br>新たな発見を</h2>
+          <p>
+            packing-tripはパッキング(荷造り)して旅する人の集うSNSです。<br>
+            ブログにはパッキングが登録されているかもしれません。<br>
+            どんなパッキングで、どんなアイテムと共に旅に出ているのかチェックしてみましょう。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-5">
+        <div class="p-5">
+          <%= image_tag 'logo.png', class: "img-fluid rounded-circle" %>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="p-5">
+          <h2 class="display-4">お気に入りを<br>見つけましょう！</h2>
+          <p>
+            気になるアイテムがあったらお気に入りに登録しましょう。<br>
+            (お気に入りにはアカウント作成とログインが必要です。アイテムやパッキングの詳細検索もできるようになります。)
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7 order-lg-2">
+        <!--カルーセルで注目のブログを表示-->
+        <div class="p-1">
+          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <%= render 'blogs/card', blog: @blogs.first %>
+              </div>
+              <% @blogs.drop(1).each do |blog| %>
+                <div class="carousel-item">
+                  <%= render 'blogs/card', blog: blog %>
+                </div>
+              <% end %>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 order-lg-1">
+        <div class="p-5">
+          <h2 class="display-4">注目の<br>新着ブログ</h2>
+          <p>
+            (直近のブログ投稿から、お気に入り登録数の多いブログを表示しています。)
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="top-user-aria">
+  <h2>トップユーザー</h2>
+  <div class="d-flex flex-row flex-nowrap overflow-auto">
+    <% @users.each do |user| %>
+      <div class="col-7 col-sm-4 col-md-4 col-lg-2">
+        <%= render 'users/profile_img', user: user %>
+        <%= link_to user.name, user_path(user), class: "top-user-aria-text" %>
+        <p class="top-user-aria-text"><%= user.followers.count %> フォロワー</p>
+      </div>
+    <% end %>
+  </div>
+</div>

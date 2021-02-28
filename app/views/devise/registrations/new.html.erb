@@ -1,0 +1,43 @@
+<div class="container page-top">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <h2 class="text-center">Sign up</h2>
+
+      <%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="form-group">
+          <%= f.label :name, "ユーザーネーム" %>
+          <%= f.text_field :name, autofocus: true, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password, "パスワード" %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> 文字以上)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation, "パスワードの確認" %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+        </div>
+
+        <div class="text-center">
+          <%= f.submit "アカウント作成", class: "btn btn-sm btn-outline-primary" %>
+        </div>
+      <% end %>
+
+      <div class="text-center mt-4">
+        <span>すでにアカウントをお持ちですか？</span><br>
+        <%= link_to " ログイン", new_user_session_path, class: "fas fa-sign-in-alt" %>
+      </div>
+    </div>
+  </div>
+</div>

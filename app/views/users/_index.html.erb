@@ -1,0 +1,7 @@
+<% users.each do |user| %>
+  <div class="card" style="width: 20rem;">
+    <div class="card-body">
+      <%= render 'users/profile', user: user %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+$("#index").html("<%= j(render 'users/index', users: @users) %>");
+$("#paginate").html("<%= paginate @users, remote: true %>");

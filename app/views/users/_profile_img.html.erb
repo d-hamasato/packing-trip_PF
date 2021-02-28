@@ -1,0 +1,5 @@
+<% if user.profile_img.present? %>
+  <%= image_tag user.profile_img.url, class: "img-fluid img-profile rounded-circle" %>
+<% else %>
+  <%= image_tag "no_images/no_image_profile.jpg", class: "img-fluid img-profile rounded-circle" %>
+<% end %>

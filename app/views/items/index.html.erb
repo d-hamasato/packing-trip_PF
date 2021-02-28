@@ -1,0 +1,10 @@
+<div class="container page-top">
+  <h2 class="text-center">アイテム一覧</h2>
+  <% if user_signed_in? %>
+    <!--アイテム絞り込みフィールド-->
+    <%= render 'searches/advanced_form', obj: @items %>
+  <% end %>
+  <div id="index">
+    <%= render 'index', items: @items %>
+  </div>
+</div>

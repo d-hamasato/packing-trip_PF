@@ -1,0 +1,80 @@
+<div class="container page-top">
+  <div class="row">
+    <div class="col-md-10 col-lg-8 mx-auto">
+      <div class="d-flex justify-content-end align-items-center flex-wrap">
+        <P>お気に入り<%= render 'favorites/btn_blog', blog: @blog %></P>
+      </div>
+      <div class="mb-2">
+        <%= render 'tags/tags', obj: @blog %>
+      </div>
+      <div class="card-header">
+        <h2 class=""><%= @blog.title %></h2>
+      </div>
+      <div class="d-flex justify-content-end align-items-end flex-wrap">
+        <p>
+          <span>To <%= @blog.destination %>
+          <!--ブログカテゴリごとにアイコンを分けて表示-->
+            <% case @blog.category %>
+            <% when "ハイク" %>
+              <i class="fas fa-hiking fa-2x"></i>
+            <% when "自転車" %>
+              <i class="fas fa-bicycle fa-2x"></i>
+            <% when "オートバイ" %>
+              <i class="fas fa-motorcycle fa-2x"></i>
+            <% end %>
+          </span>
+        </p>
+        <p class="ml-3">出発日 <%= @blog.departed_date %></p>
+      </div>
+      <% if @packing %>
+        <div class="text-right">
+          <span>check it! <i class="far fa-hand-point-right"></i></span>
+          <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapsePacking" aria-expanded="false" aria-controls="collapsePacking">
+            持っていったパッキング
+          </button>
+          <div class="collapse" id="collapsePacking">
+            <div class="d-flex justify-content-end">
+              <%= render 'packings/card', packing: @packing %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <%=raw @blog.content %>
+      <div class="card-footer text-muted text-right">
+        <% if @blog.created_at == @blog.updated_at %>
+          <span>Posted on <%= @blog.created_at.strftime("%Y-%m-%d") %></span>
+        <% else %>
+          <span>Updated on <%= @blog.updated_at.strftime("%Y-%m-%d") %></span>
+          <span>Posted on <%= @blog.created_at.strftime("%Y-%m-%d") %></span>
+        <% end %>
+      </div>
+      <!--コメント-->
+      <div id="comment-aria" class="page-top">
+        <h5>コメント一覧</h5>
+        <div id="comments-index">
+          <%= render partial: 'comments/index', locals: { blog: @blog, comment_new: @comment_new }  %>
+        </div>
+        <!--コメントのフォーム-->
+        <div class="form-group">
+          <%= form_with(model:[@blog, @comment_new]) do |f| %>
+            <%= f.text_area :content, rows:'3', placeholder: "コメントはここに入力", class: "form-control comment_form" %>
+            <%= f.submit "送信する", class: "btn btn-primary form-control" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 col-lg-2">
+      <h5>Posted by..</h5>
+      <%= render 'users/profile', user: @blog.user %>
+      <div class="text-center mt-3">
+        <% if user_signed_in? && @blog.user == current_user %>
+          <%= link_to edit_blog_path(@blog), class: "btn btn-sm btn-block btn-primary" do %>
+            <span style="color:whitesmoke;">ブログの編集 <i class="fas fa-edit" style="color:whitesmoke;"></i></span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
