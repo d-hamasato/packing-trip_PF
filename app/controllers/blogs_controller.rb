@@ -5,7 +5,6 @@ class BlogsController < ApplicationController
 
   def new
     @blog = Blog.new
-    @selectable_packings = current_user.packings.pluck(:name, :id)
     @h2_text = "新規ブログ投稿"
     @submit_text = "ブログ投稿"
   end
@@ -22,7 +21,6 @@ class BlogsController < ApplicationController
 
   def edit
     @blog = Blog.find(params[:id])
-    @selectable_packings = current_user.packings.pluck(:name, :id)
     @h2_text = "ブログ編集"
     @submit_text = "ブログ編集"
   end
@@ -59,6 +57,13 @@ class BlogsController < ApplicationController
     else
       render "edit"
     end
+  end
+
+  def destroy
+    blog = Blog.find(params[:id])
+    blog.destroy
+    flash[:success] = "ブログが削除されました"
+    redirect_to blogs_path
   end
 
   private

@@ -1,2 +1,7 @@
 <%= render 'layouts/errors', obj: @blog %>
-<%= render 'form' %>
+<%= render 'form', blog: @blog %>
+<div class="container">
+  <div class="text-right">
+    <%= link_to "ブログを削除する", blog_path(params[:id]), method: :delete, data: { confirm: "本当にブログを削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
+  </div>
+</div>
