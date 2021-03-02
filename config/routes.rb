@@ -4,8 +4,8 @@ Rails.application.routes.draw do
     post 'users/guest_sign_in' => 'users/sessions#new_guest'
   end
 
-  root "static_pages#top"
-  get "about" => "static_pages#about"
+  root "homes#top"
+  get "about" => "homes#about"
 
   resources :users, only: [:show, :index, :edit, :update] do
     member do
