@@ -1,4 +1,4 @@
-class StaticPagesController < ApplicationController
+class HomesController < ApplicationController
   def top
     @users = User.order_followers.limit(15)
     @blogs = Blog.hottest(3)
