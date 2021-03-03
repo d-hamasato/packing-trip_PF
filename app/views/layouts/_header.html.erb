@@ -45,6 +45,7 @@
               <%= link_to "ユーザー一覧", users_path, class: "dropdown-item" %>
               <%= link_to "フォロー中のユーザー", users_path(following_id: current_user.id), class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
+              <%= link_to "アカウントの編集", edit_user_registration_path, class: "dropdown-item" %>
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             </div>
           </li>
