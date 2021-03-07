@@ -5,8 +5,6 @@ class BlogsController < ApplicationController
 
   def new
     @blog = Blog.new
-    @h2_text = "新規ブログ投稿"
-    @submit_text = "ブログ投稿"
   end
 
   def index
@@ -21,8 +19,6 @@ class BlogsController < ApplicationController
 
   def edit
     @blog = Blog.find(params[:id])
-    @h2_text = "ブログ編集"
-    @submit_text = "ブログ編集"
   end
 
   def show
@@ -31,7 +27,6 @@ class BlogsController < ApplicationController
     # ブログに対するパッキングアイテムの紐付けはマストでないため
     if @blog.packing && @blog.packing.is_public?
       @packing = @blog.packing
-      @items = Item.public_items.packing_items(@packing)
     end
   end
 

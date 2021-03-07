@@ -1,21 +1,21 @@
-<%= render 'layouts/errors', obj: @user %>
 <div class="container page-top">
   <div class="row">
     <div class="col-md-6 mx-auto">
-      <h2 class="text-center">ユーザー登録情報の変更</h2>
+      <h2 class="text-center">プロフィールの編集</h2>
+      <%= render 'layouts/errors', obj: @user %>
       <%= form_with model: @user, local: true do |f| %>
         <div class="form-group">
-          <%= f.label :name, "ユーザーネーム" %>
+          <%= f.label :name %>
           <%= f.text_field :name, autofocus: true, class: "form-control" %>
         </div>
         <div class="form-group">
-          <%= f.label :introduction, "自己紹介(250字まで)" %>
+          <%= f.label :introduction %><span> (250字まで)</span>
           <%= f.text_area :introduction,
             placeholder: "例）登山の主な活動エリアは長野です。カブでキャンプツーリングもよく行きます。",
             class: "form-control"%>
         </div>
         <div class="form-group">
-          <%= f.label :profile_img, "プロフィール画像" %>
+          <%= f.label :profile_img %>
           <%= f.file_field :profile_img, class: "form-control" %>
         </div>
         <div class="text-center">

@@ -1,7 +1,14 @@
-<%= render 'layouts/errors', obj: @blog %>
-<%= render 'form', blog: @blog %>
-<div class="container">
-  <div class="text-right">
-    <%= link_to "ブログを削除する", blog_path(params[:id]), method: :delete, data: { confirm: "本当にブログを削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
+<div class="container page-top">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      <h2 class="text-center">ブログ編集</h2>
+      <%= render 'layouts/errors', obj: @blog %>
+      <%= render 'form', blog: @blog %>
+      <div class="container">
+        <div class="text-right">
+          <%= link_to "ブログを削除する", blog_path(params[:id]), method: :delete, data: { confirm: "本当にブログを削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

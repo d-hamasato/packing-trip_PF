@@ -1,55 +1,48 @@
-<div class="container page-top">
-  <div class="row">
-    <div class="col-md-10 mx-auto">
-      <h2 class="text-center"><%= @h2_text %></h2>
-      <%= form_with model: blog, local: true do |f| %>
-        <div class="form-group">
-          <%= f.label :title, "タイトル" %>
-          <%= f.text_field :title, autofocus: true, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= f.label :category, "旅のカテゴリー" %>
-          <%= f.select :category, Blog.categories.keys, selected: blog.category, class: "form-control" %>
-        </div>
-        <!--<% if current_user.packings %>-->
-        <div class="form-group">
-          <%= f.label :packing_id, "持っていったパッキング" %>
-          <% if blog.packing.present? %>
-            <%= f.select :packing_id, current_user.packings.pluck(:name, :id), selected: blog.packing_id, class: "form-control" %>
-          <% else %>
-            <%= f.select :packing_id, current_user.packings.pluck(:name, :id), class: "form-control" %>
-          <% end %>
-        </div>
-        <!--<% end %>-->
-        <div class="form-group">
-          <%= f.label :departed_date, "出発日" %>
-          <%= f.date_field :departed_date, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= f.label :destination, "目的地" %>
-          <%= f.text_field :destination, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= f.label :blog_tmb_img, "ブログのサムネイル画像" %>
-          <%= f.file_field :blog_tmb_img, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= f.label :tag_name, "ブログにタグを追加する場合はこちらに入力" %>
-          <% if blog.tags %>
-            <!--既にブログタグがついていたら、tag-itのUIが適用される形で表示する-->
-            <%= f.text_field :tag_name, value: blog.tags.pluck(:tag_name).join(","), class: "form-control tag_form" %>
-          <% else %>
-            <%= f.text_field :tag_name, class: "form-control tag_form" %>
-          <% end %>
-        </div>
-        <div class="form-group">
-          <%= f.label :content, "ブログ内容" %>
-          <%= f.text_area :content, 'data-provider': :summernote %>
-        </div>
-        <div class="text-center">
-          <%= f.submit @submit_text, class: "btn btn-sm btn-outline-primary" %>
-        </div>
-      <% end %>
-    </div>
+<%= form_with model: blog, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, autofocus: true, class: "form-control" %>
   </div>
-</div>
+  <div class="form-group">
+    <%= f.label :category %>
+    <%= f.select :category, Blog.categories.keys, selected: blog.category, class: "form-control" %>
+  </div>
+  <!--<% if current_user.packings %>-->
+  <div class="form-group">
+    <%= f.label :packing_id, "持っていったパッキング" %>
+    <% if blog.packing.present? %>
+      <%= f.select :packing_id, current_user.packings.pluck(:name, :id), selected: blog.packing_id, class: "form-control" %>
+    <% else %>
+      <%= f.select :packing_id, current_user.packings.pluck(:name, :id), class: "form-control" %>
+    <% end %>
+  </div>
+  <!--<% end %>-->
+  <div class="form-group">
+    <%= f.label :departed_date %>
+    <%= f.date_field :departed_date, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :destination %>
+    <%= f.text_field :destination, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :blog_tmb_img %>
+    <%= f.file_field :blog_tmb_img, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :tag_name, "ブログにタグを追加する場合はこちらに入力" %>
+    <% if blog.tags %>
+      <!--既にブログタグがついていたら、tag-itのUIが適用される形で表示する-->
+      <%= f.text_field :tag_name, value: blog.tags.pluck(:tag_name).join(","), class: "form-control tag_form" %>
+    <% else %>
+      <%= f.text_field :tag_name, class: "form-control tag_form" %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :content %>
+    <%= f.text_area :content, 'data-provider': :summernote %>
+  </div>
+  <div class="text-center">
+    <%= f.submit class: "btn btn-sm btn-outline-primary" %>
+  </div>
+<% end %>
