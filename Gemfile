@@ -81,8 +81,9 @@ gem 'kaminari','~> 1.2.1'
 # ダミーseedデータの作成
 gem 'faker'
 gem 'gimei'
-# railsエラーメッセージの日本語化
+# railsエラーメッセージ等の日本語化
 gem 'rails-i18n'
+gem 'devise-i18n'
 
 group :production do
   gem 'mysql2'
