@@ -5,8 +5,6 @@ class PackingsController < ApplicationController
 
   def new
     @packing = Packing.new
-    @selectable_items = current_user.items.where(has: true).pluck(:name, :id)
-    # 現在ログイン中のユーザーが所持しているアイテムのみ、セレクトボックスに選択肢として表示する
   end
 
   def index
@@ -19,8 +17,6 @@ class PackingsController < ApplicationController
 
   def edit
     @packing = Packing.find(params[:id])
-    @selectable_items = current_user.items.where(has: true).pluck(:name, :id)
-    # 現在ログイン中のユーザーが所持しているアイテムのみ、セレクトボックスに選択肢として表示する
   end
 
   def show
@@ -33,7 +29,8 @@ class PackingsController < ApplicationController
 
   def create
     sent_tags = params[:packing][:tag_name].split(",")
-    if @packing = current_user.packings.create(packing_params)
+    @packing = current_user.packings.new(packing_params)
+    if @packing.save
       @packing.save_tag(sent_tags)
       flash[:success] = "パッキングが追加されました"
       redirect_to packing_path(@packing)

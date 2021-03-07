@@ -1,18 +1,18 @@
 <%= form_with model: item, local: true do |f| %>
   <div class="form-group">
-    <%= f.label :name, "アイテム名" %>
+    <%= f.label :name %>
     <%= f.text_field :name, autofocus: true, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :description, "アイテムの説明" %>
+    <%= f.label :description %>
     <%= f.text_area :description, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :item_img, "アイテムの画像" %>
+    <%= f.label :item_img %>
     <%= f.file_field :item_img, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :weight, "アイテムの重量(g)" %>
+    <%= f.label :weight %><span> (g)</span>
     <%= f.text_field :weight, placeholder: "例）500", class: "form-control" %>
   </div>
   <div class="form-group">
@@ -24,6 +24,6 @@
     <% end %>
   </div>
   <div class="text-center">
-    <%= f.submit "送信", class: "btn btn-outline-primary" %>
+    <%= f.submit class: "btn btn-outline-primary" %>
   </div>
 <% end %>

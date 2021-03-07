@@ -12,6 +12,7 @@ class Item < ApplicationRecord
   mount_uploader :item_img, ItemImgUploader
 
   scope :public_items, -> { where(is_public: true) }
+  scope :has, -> { where(has: true) }
 
   # アイテム一覧ページの絞り込み
   scope :search, -> (search_params) do
@@ -31,12 +32,12 @@ class Item < ApplicationRecord
   def self.packing_items(packing)
     self.where(id: packing.packing_items.pluck(:item_id))
   end
-  
+
   # 引数のユーザーがお気に入り楼録しているアイテムを返す。
   def self.favorites(user)
     self.joins(:favorites).where(favorites: { user_id: user})
   end
-  
+
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end

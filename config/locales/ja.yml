@@ -1,2 +1,40 @@
 ja:
   activerecord:
+    models:
+      user: "ユーザー"
+      item: "アイテム"
+      packing: "パッキング"
+      blog: "ブログ"
+      comment: "コメント"
+    attributes:
+      user:
+        name: "ユーザーネーム"
+        email: "Email"
+        password: "パスワード"
+        password_confirmation: "パスワードの確認"
+        introduction: "自己紹介"
+        profile_img: "プロフィール画像"
+      item:
+        name: "アイテム名"
+        description: "アイテムの説明"
+        item_img: "アイテムの画像"
+        weight: "アイテムの重量"
+      packing:
+        name: "パッキング名"
+        description: "パッキングの説明"
+        number_of_nights: "何泊分か"
+        packing_img: "パッキングの画像"
+      blog:
+        title: "タイトル"
+        category: "旅のカテゴリー"
+        departed_date: "出発日"
+        destination: "目的地"
+        blog_tmb_img: "ブログのサムネイル画像"
+        content: "ブログ内容"
+      comment:
+        content: "コメント"
+  helpers:
+    submit:
+      create: "登録する"
+      update: "更新する"
+      submit: "送信する"
