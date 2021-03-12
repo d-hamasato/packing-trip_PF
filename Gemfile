@@ -69,6 +69,8 @@ gem 'font-awesome-sass'
 # 画像アップロード、リサイズ
 gem 'carrierwave', '~> 2.0'
 gem 'mini_magick'
+# 画像のアップロード先を外部(S3)へ変更するため
+gem 'fog-aws'
 # 親子関係を持ったフォームの作成
 gem 'cocoon'
 # リッチテキストエディタ
