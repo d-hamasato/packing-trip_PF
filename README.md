@@ -29,9 +29,10 @@
 - [アプリケーション詳細設計(Googleスプレッドシート)](https://drive.google.com/file/d/12wHQoi0iIzxY7oGDvix1olaH_2BU-7JA/view?usp=sharing)
 
 ## 開発環境
-- OS：Linux(CentOS)
-- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- OS：Linux(Amazon Linux 2)
+- 言語：HTML,SCSS,Ruby (JavaScript,SQL)
 - フレームワーク：Ruby on Rails
+- CSSフレームワーク：Bootstrap
 - JSライブラリ：jQuery
 - IDE：Cloud9
 
