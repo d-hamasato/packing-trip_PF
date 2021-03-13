@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :check_guest, only: :edit
+  before_action :correct_user, only: [:edit, :update]
+  before_action :check_guest, only: :update
 
   def index
     if params[:following_id]#ヘッダーのフォロー中ユーザーからの遷移
@@ -43,9 +44,17 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :introduction, :profile_img)
   end
 
+  # editアクションなどはログインユーザーのみが使用可能とするため
+  def correct_user
+    user = User.find(params[:id])
+    if current_user != user
+      redirect_to root_path
+    end
+  end
+
   def check_guest
     if current_user.email == 'guest@example.com'
-      flash[:warning] = "ゲストユーザーは編集できません"
+      flash[:warning] = "ゲストユーザーのプロフィールは編集できません"
       redirect_back fallback_location: root_path
     end
   end

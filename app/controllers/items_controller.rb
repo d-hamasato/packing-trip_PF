@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :create, :update, :destroy, :switch_status]
   before_action :correct_user, only: [:edit, :update, :destroy, :switch_status]
   before_action :redirect_if_private, only: [:show]
+  before_action -> { redirect_if_guest('item') }, only: [:update, :destroy]
 
   def new
     @item = Item.new
