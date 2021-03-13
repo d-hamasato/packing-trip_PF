@@ -1,7 +1,7 @@
 class BlogsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :create, :update, :destroy, :switch_status]
   before_action :correct_user, only: [:edit, :update, :destroy, :switch_status]
-  before_action :check_guest, only: [:update, :destroy]
+  before_action -> { redirect_if_guest('blog') }, only: [:update, :destroy]
   # before_action :redirect_if_private, only: [:show]
 
   def new
@@ -84,13 +84,6 @@ class BlogsController < ApplicationController
     end
   end
 
-  #ゲストユーザーは過去の投稿（idが一定数より小さい投稿）を削除できない
-  def check_guest
-    if current_user.email == 'guest@example.com' && params[:id].to_i <= ENV['PROTECT_GUESTS_BLOG_ID_BORDER'].to_i
-      flash[:warning] = "ゲストユーザーは過去の投稿を編集・削除できません"
-      redirect_back fallback_location: root_path
-    end
-  end
   # 非公開のブログ詳細ページはアイテムの所有ユーザーのみが参照できる
   # def redirect_if_private
   #   blog = Blog.find(params[:id])
