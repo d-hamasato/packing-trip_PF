@@ -8,7 +8,7 @@ class BlogTmbImgUploader < CarrierWave::Uploader::Base
   # storage :file
   # storage :fog
   if Rails.env.production?
-    storage :file
+    storage :fog
   elsif Rails.env.development?  # 開発環境の場合はS3にアップロード
     storage :fog
   else
