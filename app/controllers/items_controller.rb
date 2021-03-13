@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :create, :update, :destroy, :switch_status]
   before_action :correct_user, only: [:edit, :update, :destroy, :switch_status]
   before_action :redirect_if_private, only: [:show]
+  before_action :check_guest, only: [:update, :destroy]
 
   def new
     @item = Item.new
@@ -86,6 +87,14 @@ class ItemsController < ApplicationController
         flash[:info] = "このアイテムは非公開です"
         redirect_back fallback_location: root_path
       end
+    end
+  end
+
+  #ゲストユーザーは過去の投稿（idが一定数より小さい投稿）を削除できない
+  def check_guest
+    if current_user.email == 'guest@example.com' && params[:id].to_i <= ENV['PROTECT_GUESTS_ITEM_ID_BORDER'].to_i
+      flash[:warning] = "ゲストユーザーは過去の投稿を編集・削除できません"
+      redirect_back fallback_location: root_path
     end
   end
 end

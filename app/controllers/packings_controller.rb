@@ -105,4 +105,12 @@ class PackingsController < ApplicationController
       end
     end
   end
+
+  #ゲストユーザーは過去の投稿（idが一定数より小さい投稿）を削除できない
+  def check_guest
+    if current_user.email == 'guest@example.com' && params[:id].to_i <= ENV['PROTECT_GUESTS_PACKING_ID_BORDER'].to_i
+      flash[:warning] = "ゲストユーザーは過去の投稿を編集・削除できません"
+      redirect_back fallback_location: root_path
+    end
+  end
 end
