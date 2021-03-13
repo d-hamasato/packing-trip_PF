@@ -9,7 +9,7 @@ class ProfileImgUploader < CarrierWave::Uploader::Base
   # storage :file
   # storage :fog
   if Rails.env.production?
-    storage :fog
+    storage :file
   elsif Rails.env.development?# 開発環境の場合はS3にアップロード
     storage :fog
   else
