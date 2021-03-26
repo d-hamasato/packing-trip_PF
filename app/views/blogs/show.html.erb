@@ -1,6 +1,6 @@
 <div class="container page-top">
   <div class="row">
-    <div class="col-md-10 col-lg-8 mx-auto">
+    <div class="col-md-9 col-lg-9 mx-auto">
       <div class="d-flex justify-content-end align-items-center flex-wrap">
         <P>お気に入り<%= render 'favorites/btn_blog', blog: @blog %></P>
       </div>
@@ -63,16 +63,68 @@
         </div>
       </div>
     </div>
-    <div class="col-md-2 col-lg-2">
-      <h5>Posted by..</h5>
-      <%= render 'users/profile', user: @blog.user %>
-      <div class="text-center mt-3">
-        <% if user_signed_in? && @blog.user == current_user %>
-          <%= link_to edit_blog_path(@blog), class: "btn btn-sm btn-block btn-primary" do %>
-            <span style="color:whitesmoke;">ブログの編集 <i class="fas fa-edit" style="color:whitesmoke;"></i></span>
+    <!--右サイドバー-->
+    <div class="col-md-3 col-lg-3">
+      <div class="bloger-profile">
+        <h5>Posted by..</h5>
+        <%= render 'users/profile', user: @blog.user %>
+        <div class="text-center mt-3">
+          <% if user_signed_in? && @blog.user == current_user %>
+            <%= link_to edit_blog_path(@blog), class: "btn btn-sm btn-block btn-primary" do %>
+              <span style="color:whitesmoke;">ブログの編集 <i class="fas fa-edit" style="color:whitesmoke;"></i></span>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
+      <% if @blog.destination %>
+        <div class="map-aria">
+          <h4>旅の目的地</h4>
+          <span id="address"><%= @blog.destination %></span><br>
+          <span id="geocode-error-msg"></span>
+          <div id='map'></div>
+
+          <style>
+          #map{
+            height: 400px;
+          }
+          </style>
+
+          <script>
+          let map
+          let geocoder
+          let inputAddress = document.getElementById('address').textContent;
+          
+          function initMap(){
+            // geocoderを初期化
+            geocoder = new google.maps.Geocoder()
+            geocoder.geocode( { 'address': inputAddress }, function(results, status) {
+              if (status == 'OK') {
+          　　　　　　　　　　　　// ブログに紐付いた目的地の位置情報をgeocoderで取得できたらその地図を表示
+                map = new google.maps.Map(document.getElementById('map'), {
+                center: results[0].geometry.location,
+                zoom: 8
+                });
+          　　　　　　　　　　　　// google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+              } else {
+          　　　　　　　　　　　　//エラーメッセージを表示してとりあえずオーストラリアの地図を表示
+                let geocodeErrorMsg = document.getElementById("geocode-error-msg");
+                geocodeErrorMsg.textContent = "位置情報を取得できませんでした"
+                geocodeErrorMsg.classList.add("geocode-error-style");
+                map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 8
+                });
+              }
+            });
+          }
+          </script>
+          <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['YOUR_API_KEY'] %>&callback=initMap" async defer></script>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
