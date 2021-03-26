@@ -174,7 +174,7 @@ footer {
   margin-left: 3px;
   font-size: 13px;
   color: white;
-  background-color: #DCA57A;
+  background-color: $orange;
   border-radius: 5px;
 }
 .tag-checkbox-aria{
@@ -192,14 +192,32 @@ footer {
   background-color: rgba(91,91,91,0.50);
 }
 
+// ブログ投稿者プロフィールサイズ調整
+.bloger-profile {
+  padding: 0 30px;
+}
+.map-aria {
+  margin-top: 60px;
+  // text-align: center;
+  .geocode-error-style {
+    display: inline-block;
+    margin: 0 auto;
+    font-size: 10px;
+    color: white;
+    background-color: $red;
+    padding: 5px;
+    border-radius: 5px;
+  }
+}
+
 // ブログコメントの吹き出し
-.balloon{
+.balloon {
   background-color: #e9ecef;
   position: relative;
   padding: 10px;
   border-radius: 10px;
 }
-.balloon::before{
+.balloon::before {
   content: '';
   position: absolute;
   display: block;
