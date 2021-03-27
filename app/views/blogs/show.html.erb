@@ -76,54 +76,9 @@
           <% end %>
         </div>
       </div>
-      <% if @blog.destination %>
-        <div class="map-aria">
-          <h4>旅の目的地</h4>
-          <span id="address"><%= @blog.destination %></span><br>
-          <span id="geocode-error-msg"></span>
-          <div id='map'></div>
-
-          <style>
-          #map{
-            height: 400px;
-          }
-          </style>
-
-          <script>
-          function initMap(){
-            let inputAddress = document.getElementById('address').textContent;
-            // geocoderを初期化
-            let geocoder = new google.maps.Geocoder()
-            geocoder.geocode( { 'address': inputAddress }, function(results, status) {
-              if (status == 'OK') {
-          　　　　　　　　　　　　// ブログに紐付いた目的地の位置情報をgeocoderで取得できたらその地図を表示
-                let map = new google.maps.Map(document.getElementById('map'), {
-                center: results[0].geometry.location,
-                zoom: 8
-                });
-          　　　　　　　　　　　　// google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
-                let marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
-              } else {
-          　　　　　　　　　　　　//エラーメッセージを表示してとりあえずオーストラリアの地図を表示
-                let geocodeErrorMsg = document.getElementById("geocode-error-msg");
-                geocodeErrorMsg.textContent = "位置情報を取得できませんでした";
-                geocodeErrorMsg.classList.add("geocode-error-style");
-                map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: -34.397, lng: 150.644},
-                zoom: 8
-                });
-              }
-            });
-          }
-          </script>
-          <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['YOUR_API_KEY'] %>&callback=initMap" async defer></script>
-        </div>
+      <% if @blog.destination.present? %>
+        <%= render "map", blog: @blog %>
       <% end %>
     </div>
   </div>
 </div>
-
-
