@@ -198,7 +198,9 @@ footer {
 }
 .map-aria {
   margin-top: 60px;
-  // text-align: center;
+  #map {
+    height: 400px;
+  }
   .geocode-error-style {
     display: inline-block;
     margin: 0 auto;
