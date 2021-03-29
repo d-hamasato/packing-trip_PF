@@ -160,12 +160,37 @@ footer {
   }
 }
 
-// fontAwesomeのアイコン色
+// fontAwesome
+.fa-stack {
+  font-size: 0.5em;
+}
 .fa-toggle-on {
   color: $purple;
 }
 .fa-home {
   color: #800080;
+}
+.fa-bell {
+  color: $yellow;
+}
+.fa-circle {
+  color: $red;
+  position: absolute;
+  padding-left: 10px;
+}
+
+// 通知
+#notice-index {
+  a {
+    color: $orange;
+    font-weight: bold;
+  }
+}
+.notice-badge {
+  position: absolute;
+  padding-left: 1rem;
+  padding-top: 0rem;
+  color: #efa04c;
 }
 
 // タグ

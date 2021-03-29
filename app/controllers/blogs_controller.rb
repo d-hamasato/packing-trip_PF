@@ -36,6 +36,7 @@ class BlogsController < ApplicationController
     sent_tags = params[:blog][:tag_name].split(",")
     if @blog.save
       @blog.save_tag(sent_tags)
+      @blog.create_notice_new_blog  #フォロワーにブログの新規投稿を
       flash[:success] = "ブログが投稿されました"
       redirect_to blog_path(@blog)
     else

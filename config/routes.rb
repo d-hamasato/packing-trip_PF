@@ -38,4 +38,8 @@ Rails.application.routes.draw do
   get '/search_blogs' => 'searches#search_blogs'
   get '/search_users' => 'searches#search_users'
   get '/search_all_contents' => 'searches#search_all_contents'
+
+  get '/checked_notice/:id' => 'notifications#checked_notice', as: 'checked_notice'
+  get '/checked_notice_all' => 'notifications#checked_notice_all', as: 'checked_notice_all'
+  get '/redirect_check_content/:id' => 'notifications#redirect_check_content', as: 'redirect_check_content'
 end

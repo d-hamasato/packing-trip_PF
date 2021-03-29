@@ -1,0 +1,3 @@
+$("#notice-index").html("<%= j(render partial: 'layouts/notification', collection: @notifications) %>");
+$("#notice-icon").html("<%= j(render 'notifications/icon', notifications: @notifications) %>");
+$("#notice-count").html("新しい通知はありません");
