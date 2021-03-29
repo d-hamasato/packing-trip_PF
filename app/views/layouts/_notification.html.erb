@@ -1,0 +1,40 @@
+<div class="dropdown-divider"></div>
+<div id="notice-<%= notification.id %>" class="dropdown-item">
+  <p class="small text-muted text-right mb-0"><%= notification.created_at.strftime("%Y-%-m-%-d %H:%M") %></p>
+  <p class="mb-0">
+    <% case notification.action %>
+    <% when "follow" %>
+      <%= link_to notification.sender.name, redirect_check_content_path(notification) %>
+      さんが
+      あなたをフォローしました
+      <%= render 'notifications/checked_notice_btn', notification: notification %>
+    <% when "comment" %>
+      <%= link_to notification.sender.name, user_path(notification.sender) %>
+      さんが
+      <%= link_to "あなたのブログに", redirect_check_content_path(notification) %>
+      コメントしました
+      <%= render 'notifications/checked_notice_btn', notification: notification %>
+      <span class="small text-muted">
+        <%= notification.comment.content[0, 25] %><%= ".." if notification.comment.content.size > 25 %>
+      </span>
+    <% when "reply_comment" %>
+      <%= link_to notification.sender.name, user_path(notification.sender) %>
+      さんが
+      <%= link_to "あなたのコメント", redirect_check_content_path(notification) %>
+      に返信しました
+      <%= render 'notifications/checked_notice_btn', notification: notification %>
+      <span class="small text-muted">
+        <%= notification.comment.content[0, 25] %><%= ".." if notification.comment.content.size > 25 %>
+      </span>
+    <% when "blog" %>
+      <%= link_to notification.sender.name, user_path(notification.sender) %>
+      さんが
+      <%= link_to "新しいブログ", redirect_check_content_path(notification) %>
+      を投稿しました
+      <%= render 'notifications/checked_notice_btn', notification: notification %>
+      <span class="small text-muted">
+        タイトル: <%= notification.blog.title %>
+      </span>
+    <% end %>
+  </p>
+</div>

@@ -32,6 +32,28 @@
               マイページ <i class="fas fa-home"></i>
             <% end %>
           </li>
+          <li class="nav-item dropdown addClassShow">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownNotice" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              通知 <i class="fas fa-bell"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right addClassShow" aria-labelledby="navbarDropdownNotice">
+              <% if @notifications.any? %>
+                <div class="dropdown-item small text-right">
+                  <span id="notice-count">
+                    <%= current_user.passive_notifications.where(checked: false).count %>件の通知を全て削除
+                  </span>
+                  <%= link_to checked_notice_all_path, remote: true do %>
+                    <i class="far fa-times-circle"></i>
+                  <% end %>
+                </div>
+                <div id="notice-index">
+                  <%= render partial: 'layouts/notification', collection: @notifications %>
+                </div>
+              <% else %>
+                <span>新しい通知はありません</span>
+              <% end %>
+            </div>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <%= current_user.name %>

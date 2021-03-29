@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :check_notifications, if: :user_signed_in?
 
   protected
 
@@ -26,5 +27,10 @@ class ApplicationController < ActionController::Base
       flash[:warning] = "ゲストユーザーは過去の投稿を編集・削除できません"
       redirect_back fallback_location: root_path
     end
+  end
+
+  # ヘッダーに表示させる通知を取得する
+  def check_notifications
+    @notifications = current_user.passive_notifications.where(checked: false).limit(5)
   end
 end

@@ -1,4 +1,7 @@
+require './lib/module/notice'
+
 class Blog < ApplicationRecord
+  include Notice
 
   belongs_to :user
   belongs_to :packing
@@ -6,6 +9,7 @@ class Blog < ApplicationRecord
   has_many :comments,  dependent: :destroy
   has_many :tag_maps,  dependent: :destroy
   has_many :tags, through: :tag_maps
+  has_many :notifications, dependent: :destroy
 
   validates :user_id,       presence: true
   validates :title,         presence: true, length: { maximum: 50 }

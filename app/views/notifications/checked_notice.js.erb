@@ -1,0 +1,4 @@
+$("#notice-index").html("<%= j(render partial: 'layouts/notification', collection: @notifications) %>");
+$("#notice-count").html("<%= current_user.passive_notifications.where(checked: false).count %>件の通知を全て削除");
+$("#navbarDropdownNotice").attr('aria-expanded', 'true');
+$(".addClassShow").addClass('show');
