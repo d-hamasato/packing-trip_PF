@@ -34,7 +34,10 @@
           </li>
           <li class="nav-item dropdown addClassShow">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownNotice" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              通知 <i class="fas fa-bell"></i>
+              通知
+              <span id="notice-icon">
+                <%= render 'notifications/icon', notifications: @notifications %>
+              </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right addClassShow" aria-labelledby="navbarDropdownNotice">
               <% if @notifications.any? %>
