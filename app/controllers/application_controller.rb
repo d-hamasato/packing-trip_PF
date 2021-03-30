@@ -31,6 +31,6 @@ class ApplicationController < ActionController::Base
 
   # ヘッダーに表示させる通知を取得する
   def check_notifications
-    @notifications = current_user.passive_notifications.where(checked: false).limit(5)
+    @notifications = current_user.unchecked_notice.limit(5)
   end
 end

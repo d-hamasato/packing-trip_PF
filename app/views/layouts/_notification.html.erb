@@ -15,7 +15,7 @@
       コメントしました
       <%= render 'notifications/checked_notice_btn', notification: notification %>
       <span class="small text-muted">
-        <%= notification.comment.content[0, 25] %><%= ".." if notification.comment.content.size > 25 %>
+        <%= notification.comment.content[0, 30] %><%= ".." if notification.comment.content.size > 25 %>
       </span>
     <% when "reply_comment" %>
       <%= link_to notification.sender.name, user_path(notification.sender) %>
@@ -24,7 +24,7 @@
       に返信しました
       <%= render 'notifications/checked_notice_btn', notification: notification %>
       <span class="small text-muted">
-        <%= notification.comment.content[0, 25] %><%= ".." if notification.comment.content.size > 25 %>
+        <%= notification.comment.content[0, 30] %><%= ".." if notification.comment.content.size > 25 %>
       </span>
     <% when "blog" %>
       <%= link_to notification.sender.name, user_path(notification.sender) %>

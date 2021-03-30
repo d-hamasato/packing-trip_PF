@@ -30,7 +30,7 @@ class PackingsController < ApplicationController
 
   def create
     @packing = current_user.packings.new(packing_params)
-    sent_tags = params[:packing][:tag_name].split(",")
+    sent_tags = params[:packing][:tag_name]
     if @packing.save
       @packing.save_tag(sent_tags)
       flash[:success] = "パッキングが追加されました"
@@ -42,7 +42,7 @@ class PackingsController < ApplicationController
 
   def update
     @packing = Packing.find(params[:id])
-    sent_tags = params[:packing][:tag_name].split(",")
+    sent_tags = params[:packing][:tag_name]
     if @packing.update(packing_params)
       @packing.save_tag(sent_tags)
       flash[:success] = "パッキングが更新されました"

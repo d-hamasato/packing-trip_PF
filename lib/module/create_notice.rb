@@ -1,4 +1,5 @@
-module Notice
+module CreateNotice
+  # ブロブページでのコメント投稿時に通知作成
   def create_notice_comment
     if self.parent_id.blank?
       Notification.create(
@@ -17,6 +18,7 @@ module Notice
     end
   end
 
+  # ブログ投稿時にフォロワーに通知作成
   def create_notice_new_blog
     followers = self.user.followers
     followers.each do |follower|
@@ -29,6 +31,7 @@ module Notice
     end
   end
 
+  # ユーザーフォロー時に通知作成。過去のフォローで既に通知作成済みの場合は通知を行わない。
   def create_notice_follow
     Notification.find_or_create_by(
       sender_id: self.follower_id,
