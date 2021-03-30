@@ -43,4 +43,9 @@ class User < ApplicationRecord
   def following?(user)
     following.include?(user)
   end
+
+  # 未読の通知を取得
+  def unchecked_notice
+    self.passive_notifications.where(checked: false)
+  end
 end

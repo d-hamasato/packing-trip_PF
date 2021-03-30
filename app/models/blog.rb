@@ -1,7 +1,7 @@
-require './lib/module/notice'
+require './lib/module/create_notice'
 
 class Blog < ApplicationRecord
-  include Notice
+  include CreateNotice
 
   belongs_to :user
   belongs_to :packing
